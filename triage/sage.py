@@ -18,8 +18,10 @@ import requests
 from triage import db
 
 BASE_URL = os.environ.get("SAGE_BASE_URL", "https://sage.levanto.ai")
-GROUPS_PER_CALL = 8       # issues per /decide/batch request
-PARALLEL_CALLS = 4
+# Smaller, fewer concurrent requests: big batches hit 504 timeouts and parallel ones hit 429 rate limits.
+# Override with SAGE_GROUPS_PER_CALL / SAGE_PARALLEL_CALLS if your plan allows more.
+GROUPS_PER_CALL = int(os.environ.get("SAGE_GROUPS_PER_CALL", 4))
+PARALLEL_CALLS = int(os.environ.get("SAGE_PARALLEL_CALLS", 2))
 
 
 class OutOfUsage(RuntimeError):
@@ -99,7 +101,7 @@ class SageClient:
                 r = self.session.post(f"{BASE_URL}/decide/batch", json=body, timeout=120)
             except requests.RequestException as e:
                 wait = min(60, 2 ** attempt)
-                print(f"  Sage connection error ({e}); retrying in {wait}s", file=sys.stderr)
+                print(f"\n  Sage connection error ({e}); retrying in {wait}s", file=sys.stderr)
                 time.sleep(wait)
                 continue
             if r.status_code == 200:
@@ -114,8 +116,11 @@ class SageClient:
                 raise OutOfUsage("Sage returned 402: this period's included usage is used up.")
             if r.status_code in (401, 400, 413):
                 raise RuntimeError(f"Sage {r.status_code}: {r.text[:500]}")
-            wait = float(r.headers.get("Retry-After", min(60, 2 ** attempt)))
-            print(f"  Sage {r.status_code}; retrying in {wait:.0f}s", file=sys.stderr)
+            # Back off at least exponentially, even if Retry-After asks for less.
+            wait = max(float(r.headers.get("Retry-After", 0)), min(60, 2 ** attempt))
+            with self.lock:
+                self.stats["retries"] = self.stats.get("retries", 0) + 1
+            print(f"\n  Sage {r.status_code}; retrying in {wait:.0f}s", file=sys.stderr)
             time.sleep(wait)
         raise RuntimeError("Sage kept failing")
 
