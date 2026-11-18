@@ -102,7 +102,14 @@ def main() -> None:
     for code in codes:
         for repo in repos:
             bot = make_bot(code, repo, client, rewriter)
-            run(bot, repo, RUNS / slug(bot.name), dry_run=args.dry_run)
+            try:
+                run(bot, repo, RUNS / slug(bot.name), dry_run=args.dry_run)
+            except Exception as e:
+                if type(e).__name__ != "OutOfUsage":
+                    raise
+                raise SystemExit(f"\n\nStopped: Sage returned 402, this period's included usage is used up "
+                                 f"(at {bot.name}, {repo.name}).\nEverything decided so far is cached. Add usage "
+                                 "or wait for the next period, then run the same command again to resume.")
 
     if client:
         s = client.stats
