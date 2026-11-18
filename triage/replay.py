@@ -55,9 +55,13 @@ def run(bot, repo, out_dir, dry_run=False) -> None:
                 "truth": sorted(issue.truth), "pred": sorted(p.labels), "uncertain": sorted(p.uncertain),
                 "available": list(issue.available),
                 "probs": {k: round(v, 4) for k, v in p.probs.items()},
+                **({"failed": True} if p.failed else {}),
             })
         print(f"  {bot.name:<20} {repo.name:<22} {min(start + bot.chunk_size, len(issues))}/{len(issues)}", end="\r")
     print()
+    failed = [r["number"] for r in rows if r.get("failed")]
+    if failed:
+        print(f"  {repo.name}: no answer from Sage for issues {failed} (rerun to retry)")
     if dry_run:
         return
     out_dir.mkdir(parents=True, exist_ok=True)

@@ -22,6 +22,7 @@ BASE_URL = os.environ.get("SAGE_BASE_URL", "https://sage.levanto.ai")
 # Override with SAGE_GROUPS_PER_CALL / SAGE_PARALLEL_CALLS if your plan allows more.
 GROUPS_PER_CALL = int(os.environ.get("SAGE_GROUPS_PER_CALL", 4))
 PARALLEL_CALLS = int(os.environ.get("SAGE_PARALLEL_CALLS", 2))
+REQUEST_TIMEOUT = int(os.environ.get("SAGE_TIMEOUT", 45))   # seconds; a normal batch takes 1-3 s
 
 
 class OutOfUsage(RuntimeError):
@@ -88,7 +89,7 @@ class SageClient:
         """Send a batch; if it keeps failing, send its issues one by one. An issue that still fails is
         returned as FAILED (and not cached), so one bad request can't stop the whole replay."""
         try:
-            answers, usage = self._call([g for _, g in items], attempts=4 if len(items) > 1 else 7)
+            answers, usage = self._call([g for _, g in items], attempts=2 if len(items) > 1 else 3)
             n = max(len(items), 1)
             return [(i, a, usage.get("input_tokens", 0) // n, usage.get("output_tokens", 0) // n)
                     for (i, _), a in zip(items, answers)]
@@ -117,15 +118,20 @@ class SageClient:
     def _key(group: dict) -> str:
         return hashlib.sha256(json.dumps(group, sort_keys=True).encode()).hexdigest()
 
-    def _call(self, groups: list[dict], attempts: int = 7) -> tuple[list, dict]:
+    def _call(self, groups: list[dict], attempts: int = 3) -> tuple[list, dict]:
+        """`attempts` limits tries after the server fails (5xx, timeouts, dropped connections).
+        Rate limiting (429) means "wait", not "broken": it doesn't use up attempts."""
         body = {"requests": groups}
-        for attempt in range(attempts):
+        failures = waits = 0
+        while failures < attempts:
+            t0 = time.time()
             try:
-                r = self.session.post(f"{BASE_URL}/decide/batch", json=body, timeout=120)
+                r = self.session.post(f"{BASE_URL}/decide/batch", json=body, timeout=(10, REQUEST_TIMEOUT))
             except requests.RequestException as e:
-                wait = min(60, 2 ** attempt)
-                print(f"\n  Sage connection error ({e}); retrying in {wait}s", file=sys.stderr)
-                time.sleep(wait)
+                failures += 1
+                kind = "timed out" if isinstance(e, requests.Timeout) else f"connection error ({type(e).__name__})"
+                self._note(f"request {kind} after {time.time() - t0:.0f}s (try {failures}/{attempts})")
+                time.sleep(min(30, 2 ** failures))
                 continue
             if r.status_code == 200:
                 data = r.json()
@@ -137,15 +143,23 @@ class SageClient:
                 return [res["answers"] for res in data["results"]], usage
             if r.status_code == 402:
                 raise OutOfUsage("Sage returned 402: this period's included usage is used up.")
-            if r.status_code in (401, 400, 413):
+            if r.status_code in (401, 400, 413, 422):
                 raise RuntimeError(f"Sage {r.status_code}: {r.text[:500]}")
-            # Back off at least exponentially, even if Retry-After asks for less.
-            wait = max(float(r.headers.get("Retry-After", 0)), min(60, 2 ** attempt))
-            with self.lock:
-                self.stats["retries"] = self.stats.get("retries", 0) + 1
-            print(f"\n  Sage {r.status_code}; retrying in {wait:.0f}s", file=sys.stderr)
-            time.sleep(wait)
+            if r.status_code == 429 and waits < 30:
+                waits += 1
+                wait = max(float(r.headers.get("Retry-After", 0) or 0), min(30, 2 ** min(waits, 5)))
+                self._note(f"429 rate limited; waiting {wait:.0f}s")
+                time.sleep(wait)
+                continue
+            failures += 1
+            self._note(f"{r.status_code} after {time.time() - t0:.0f}s (try {failures}/{attempts})")
+            time.sleep(min(30, 2 ** failures))
         raise SageUnavailable("Sage kept failing")
+
+    def _note(self, msg: str) -> None:
+        with self.lock:
+            self.stats["retries"] = self.stats.get("retries", 0) + 1
+        print(f"\n  Sage: {msg}", file=sys.stderr)
 
 
 def _estimate_tokens(group: dict) -> int:

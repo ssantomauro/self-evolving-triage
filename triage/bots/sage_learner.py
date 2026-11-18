@@ -81,7 +81,7 @@ class SageLearnerBot(SageStaticBot):
                 labels.add(label)
             elif p > cut - 0.05:
                 uncertain.add(label)
-        return Prediction(labels, uncertain, pred.probs)
+        return Prediction(labels, uncertain, pred.probs, pred.failed)
 
     def predict(self, issues):
         groups = [self.group(i, self._content(i)) for i in issues]
@@ -92,7 +92,7 @@ class SageLearnerBot(SageStaticBot):
         # Re-read the probabilities we just used (cached, so free) to keep a decision history.
         groups = [self.group(i, self._content(i)) for i in issues]
         for issue, answers in zip(issues, self.client.decide_groups(groups)):
-            self.history.append((self.parse(answers).probs, issue.truth))
+            self.history.append((self.parse(answers).probs, issue.truth))   # empty probs if it failed
         self.seen += issues
         self.since_refit += len(issues)
         self.since_rewrite += len(issues)

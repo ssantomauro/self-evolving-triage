@@ -45,7 +45,7 @@ class SageStaticBot(Bot):
             return Prediction(set())
         a = answers[0]
         if not a.get("ok"):
-            return Prediction(set(), uncertain=set(self.repo.labels))
+            return Prediction(set(), uncertain=set(self.repo.labels), failed=True)
         labels, uncertain, probs = set(), set(), {}
         for t in a["result"]["result"]["tags"]:
             label = self.id_labels[t["id"]]

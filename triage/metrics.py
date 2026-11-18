@@ -69,14 +69,14 @@ def new_label_f1(rows: list[dict], repo: dataset.Repo) -> tuple[int, int, int]:
 
 
 def common_issues(runs):
-    """Keep, for every version, only the issues that every version has decided, so all are scored on the
-    same set (e.g. a pilot that ran on the first 200 issues per repo)."""
+    """Keep, for every version, only the issues that every version has decided (and got an answer for),
+    so all are scored on the same set (e.g. a pilot that ran on the first 200 issues per repo)."""
     repos = set.intersection(*(set(by_repo) for by_repo in runs.values()))
     out = {}
     for bot, by_repo in runs.items():
         out[bot] = {}
         for repo in sorted(repos):
-            shared = set.intersection(*({r["number"] for r in runs[b][repo]} for b in runs))
+            shared = set.intersection(*({r["number"] for r in runs[b][repo] if not r.get("failed")} for b in runs))
             out[bot][repo] = [r for r in by_repo[repo] if r["number"] in shared]
     return out
 

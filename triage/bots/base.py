@@ -11,6 +11,7 @@ class Prediction:
     labels: set[str]                                        # labels the bot applies
     uncertain: set[str] = field(default_factory=set)        # labels it refuses to call (flagged for a human)
     probs: dict[str, float] = field(default_factory=dict)   # optional, for analysis
+    failed: bool = False                                    # the decision service gave no answer
 
 
 class Bot:
