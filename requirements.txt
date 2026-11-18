@@ -4,3 +4,4 @@ scikit-learn>=1.2
 matplotlib>=3.8
 anthropic>=0.105
 pydantic>=2.5
+tomli>=2.0; python_version < "3.11"

@@ -41,7 +41,7 @@ are in [`config/repos.toml`](config/repos.toml).
 ## Run it
 
 ```bash
-make install
+make install                  # creates .venv (uses python3; or: make install PYTHON=python3.13)
 gh auth login                 # GitHub data is read with your gh login
 make fetch                    # ~1 min
 make classic                  # versions A and B, free, ~1-2 min

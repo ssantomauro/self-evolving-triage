@@ -1,9 +1,12 @@
-PY ?= python3
+PYTHON ?= python3              # any Python 3.9+; 3.11+ recommended
+PY := .venv/bin/python
 
 .PHONY: install fetch classic estimate pilot sage report experiment
 
-install:
-	$(PY) -m pip install -r requirements.txt
+install:          ## create .venv and install dependencies
+	$(PYTHON) -m venv .venv
+	$(PY) -m pip install -q --upgrade pip
+	$(PY) -m pip install -q -r requirements.txt
 
 fetch:            ## download issue history from GitHub (needs `gh auth login`)
 	$(PY) -m triage.fetch
