@@ -42,7 +42,6 @@ def make_bot(code: str, repo, client, rewriter):
 
 
 def run(bot, repo, out_dir, dry_run=False) -> None:
-    out_dir.mkdir(parents=True, exist_ok=True)
     started = time.time()
     rows = []
     issues = repo.issues
@@ -61,6 +60,7 @@ def run(bot, repo, out_dir, dry_run=False) -> None:
     print()
     if dry_run:
         return
+    out_dir.mkdir(parents=True, exist_ok=True)
     with open(out_dir / f"{slug(repo.name)}.jsonl", "w") as f:
         for r in rows:
             f.write(json.dumps(r) + "\n")
@@ -85,6 +85,13 @@ def main() -> None:
         from triage.sage import SageClient
         client = SageClient(dry_run=args.dry_run)
         if "D" in codes and not args.no_rewrite and not args.dry_run:
+            import os
+            from pathlib import Path
+            if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")
+                    or (Path.home() / ".config" / "anthropic").exists()):
+                raise SystemExit("Version D rewrites its spec with Claude, but no Anthropic credentials were found.\n"
+                                 "Set ANTHROPIC_API_KEY (or run `ant auth login`), or add --no-rewrite to run D "
+                                 "with memory and cutoffs only.")
             from triage.rewriter import Rewriter
             rewriter = Rewriter()
 
@@ -104,6 +111,10 @@ def main() -> None:
             cost = s["input_tokens"] * SAGE_INPUT_PRICE + s["output_tokens"] * SAGE_OUTPUT_PRICE
             print(f"\nSage: {s['calls']} calls, {s['cached']} cached decisions, "
                   f"{s['input_tokens']:,} input tokens, ≈ ${cost:.2f} this run")
+    failed = [e for f in (RUNS / "D_Sage_plus_learner").glob("*.state.json")
+              for e in json.loads(f.read_text()).get("spec_log", []) if e["event"] == "rewrite_failed"]
+    if "D" in codes and failed and not args.dry_run:
+        print(f"WARNING: {len(failed)} spec rewrites failed, e.g.: {failed[0]['error']}")
     if rewriter:
         print(f"Claude rewrites: {rewriter.calls} calls, {rewriter.input_tokens:,} in / {rewriter.output_tokens:,} out")
 

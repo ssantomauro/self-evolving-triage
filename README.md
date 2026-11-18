@@ -49,7 +49,7 @@ make estimate                 # what C and D would cost, no calls
 
 export SAGE_API_KEY=lv_live_...   # https://platform.levanto.ai
 export ANTHROPIC_API_KEY=...      # for version D's spec rewrites (or `ant auth login`)
-make pilot                    # ~$0.15 sanity check
+make pilot                    # ~$1: versions C and D on the first 200 issues per repo
 make sage                     # versions C and D, ~$10 in total
 make report                   # results/report.md + results/learning_curve.png
 ```

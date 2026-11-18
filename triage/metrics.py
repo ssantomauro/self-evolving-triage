@@ -68,6 +68,19 @@ def new_label_f1(rows: list[dict], repo: dataset.Repo) -> tuple[int, int, int]:
     return tp, fp, fn
 
 
+def common_issues(runs):
+    """Keep, for every version, only the issues that every version has decided, so all are scored on the
+    same set (e.g. a pilot that ran on the first 200 issues per repo)."""
+    repos = set.intersection(*(set(by_repo) for by_repo in runs.values()))
+    out = {}
+    for bot, by_repo in runs.items():
+        out[bot] = {}
+        for repo in sorted(repos):
+            shared = set.intersection(*({r["number"] for r in runs[b][repo]} for b in runs))
+            out[bot][repo] = [r for r in by_repo[repo] if r["number"] in shared]
+    return out
+
+
 def summarize(runs):
     repos = {r.name: r for r in dataset.load_all()}
     table = []
@@ -83,12 +96,17 @@ def summarize(runs):
             "f1": f1(*counts(all_rows)),
             "f1_first50": f1(*counts(cold)),
             "f1_second_half": f1(*counts(late)),
-            "f1_new_labels": f1(*nl),
+            "f1_new_labels": f1(*nl) if nl.sum() else None,   # None: no new label in the scored issues
             "flagged": flagged,
+            "issues": len(all_rows),
             "loc": loc,
             "per_repo": {name: f1(*counts(rows)) for name, rows in by_repo.items()},
         })
     return table
+
+
+def _fmt(v):
+    return "—" if v is None else f"{v:.3f}"
 
 
 def _loc(filename):
@@ -128,7 +146,8 @@ def write_report(table, runs):
              "|---|---:|---:|---:|---:|---:|---:|"]
     for t in table:
         lines.append(f"| {t['bot']} | {t['f1']:.3f} | {t['f1_first50']:.3f} | {t['f1_second_half']:.3f} | "
-                     f"{t['f1_new_labels']:.3f} | {t['flagged']:.1%} | {t['loc'] or '—'} |")
+                     f"{_fmt(t['f1_new_labels'])} | {t['flagged']:.1%} | {t['loc'] or '—'} |")
+    lines += ["", f"Every version is scored on the same {table[0]['issues']:,} issues."]
     lines += ["", "## Per repo (label F1)", ""]
     repos = sorted({r for t in table for r in t["per_repo"]})
     lines.append("| Version | " + " | ".join(repos) + " |")
@@ -139,13 +158,14 @@ def write_report(table, runs):
 
 
 def main():
-    runs = load_runs()
+    runs = common_issues(load_runs())
     table = summarize(runs)
     write_report(table, runs)
     print(f"{'version':<20} {'F1':>6} {'first50':>8} {'2nd half':>9} {'new lbl':>8} {'flagged':>8} {'LOC':>5}")
     for t in table:
         print(f"{t['bot']:<20} {t['f1']:>6.3f} {t['f1_first50']:>8.3f} {t['f1_second_half']:>9.3f} "
-              f"{t['f1_new_labels']:>8.3f} {t['flagged']:>8.1%} {t['loc'] or '':>5}")
+              f"{_fmt(t['f1_new_labels']):>8} {t['flagged']:>8.1%} {t['loc'] or '':>5}")
+    print(f"(all versions scored on the same {table[0]['issues']:,} issues)")
     for t in table:
         print(f"  {t['bot']:<20} " + "  ".join(f"{r.split('/')[1]}={v:.3f}" for r, v in t["per_repo"].items()))
     print(f"\nWrote {OUT / 'report.md'} and learning_curve.png")

@@ -17,8 +17,8 @@ classic:          ## versions A and B: free, runs locally
 estimate:         ## Sage token/cost estimate for C and D, no calls
 	$(PY) -m triage.replay --bots C,D --dry-run
 
-pilot:            ## small paid run: first 100 issues per repo, version C only (~$0.15)
-	$(PY) -m triage.replay --bots C --limit 100
+pilot:            ## small paid run: first 200 issues per repo, versions C and D (~$1; D needs Anthropic credentials)
+	$(PY) -m triage.replay --bots C,D --limit 200
 
 sage:             ## versions C and D on everything (needs SAGE_API_KEY and Anthropic credentials, ~$10)
 	$(PY) -m triage.replay --bots C,D
