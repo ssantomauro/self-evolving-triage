@@ -28,6 +28,13 @@ class OutOfUsage(RuntimeError):
     pass
 
 
+class SageUnavailable(RuntimeError):
+    pass
+
+
+FAILED = [{"ok": False, "error": "Sage unavailable after retries (not cached; rerun to retry)"}]
+
+
 class SageClient:
     def __init__(self, dry_run: bool = False):
         self.dry_run = dry_run
@@ -67,16 +74,32 @@ class SageClient:
 
         batches = [todo[j:j + GROUPS_PER_CALL] for j in range(0, len(todo), GROUPS_PER_CALL)]
         with ThreadPoolExecutor(PARALLEL_CALLS) as pool:
-            for idxs, answers, usage in pool.map(lambda b: (b, *self._call([groups[i] for i in b])), batches):
-                share_in = usage.get("input_tokens", 0) // max(len(idxs), 1)
-                share_out = usage.get("output_tokens", 0) // max(len(idxs), 1)
-                for i, ans in zip(idxs, answers):
+            for done in pool.map(lambda b: self._resilient([(i, groups[i]) for i in b]), batches):
+                for i, ans, tin, tout in done:
                     results[i] = ans
-                    with self.lock:
-                        self.conn.execute("INSERT OR REPLACE INTO sage_cache VALUES (?,?,?,?)",
-                                          (keys[i], json.dumps(ans), share_in, share_out))
+                    if ans is not FAILED:
+                        with self.lock:
+                            self.conn.execute("INSERT OR REPLACE INTO sage_cache VALUES (?,?,?,?)",
+                                              (keys[i], json.dumps(ans), tin, tout))
         self.conn.commit()
         return results
+
+    def _resilient(self, items: list[tuple[int, dict]]) -> list[tuple]:
+        """Send a batch; if it keeps failing, send its issues one by one. An issue that still fails is
+        returned as FAILED (and not cached), so one bad request can't stop the whole replay."""
+        try:
+            answers, usage = self._call([g for _, g in items], attempts=4 if len(items) > 1 else 7)
+            n = max(len(items), 1)
+            return [(i, a, usage.get("input_tokens", 0) // n, usage.get("output_tokens", 0) // n)
+                    for (i, _), a in zip(items, answers)]
+        except SageUnavailable:
+            if len(items) > 1:
+                print(f"\n  Sage: batch of {len(items)} keeps failing; sending its issues one by one", file=sys.stderr)
+                return [row for item in items for row in self._resilient([item])]
+            with self.lock:
+                self.stats["failed"] = self.stats.get("failed", 0) + 1
+            print("\n  Sage: one issue failed after retries; skipping it (rerun to retry)", file=sys.stderr)
+            return [(items[0][0], FAILED, 0, 0)]
 
     def cached_usage(self, groups: list[dict]) -> tuple[int, int]:
         """Tokens that the cached responses for these groups cost when they were first fetched."""
@@ -94,9 +117,9 @@ class SageClient:
     def _key(group: dict) -> str:
         return hashlib.sha256(json.dumps(group, sort_keys=True).encode()).hexdigest()
 
-    def _call(self, groups: list[dict]) -> tuple[list, dict]:
+    def _call(self, groups: list[dict], attempts: int = 7) -> tuple[list, dict]:
         body = {"requests": groups}
-        for attempt in range(8):
+        for attempt in range(attempts):
             try:
                 r = self.session.post(f"{BASE_URL}/decide/batch", json=body, timeout=120)
             except requests.RequestException as e:
@@ -122,7 +145,7 @@ class SageClient:
                 self.stats["retries"] = self.stats.get("retries", 0) + 1
             print(f"\n  Sage {r.status_code}; retrying in {wait:.0f}s", file=sys.stderr)
             time.sleep(wait)
-        raise RuntimeError("Sage kept failing")
+        raise SageUnavailable("Sage kept failing")
 
 
 def _estimate_tokens(group: dict) -> int:

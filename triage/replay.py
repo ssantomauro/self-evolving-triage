@@ -109,6 +109,9 @@ def main() -> None:
                   f"(version D's spec rewrites add roughly 2 x 60 issues per rewrite on top of this)")
         else:
             cost = s["input_tokens"] * SAGE_INPUT_PRICE + s["output_tokens"] * SAGE_OUTPUT_PRICE
+            if s.get("failed"):
+                print(f"\nWARNING: {s['failed']} decisions failed after retries and were recorded as unanswered. "
+                      "Run the same command again to retry only those (everything else is cached).")
             print(f"\nSage: {s['calls']} calls ({s.get('retries', 0)} retried), {s['cached']} cached decisions, "
                   f"{s['input_tokens']:,} input tokens, ≈ ${cost:.2f} this run")
     failed = [e for f in (RUNS / "D_Sage_plus_learner").glob("*.state.json")
