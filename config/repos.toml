@@ -1,0 +1,36 @@
+# Repos replayed in the experiment. Each one plays the role of a SaaS customer that starts from zero.
+#
+# `labels` is the set every bot chooses from: labels a maintainer can decide from the issue text alone
+# (type and area). Workflow labels (needs triage, duplicate, awaiting response, ...) are left out because
+# they depend on what happens after the issue is opened.
+
+[fetch]
+max_issues = 1500                 # most recent issues per repo, before the cutoff below
+created_before = "2026-05-01"     # skip newer issues: their labels may not be final yet
+
+[[repos]]
+repo = "pandas-dev/pandas"
+labels = ["Bug", "Enhancement", "Docs", "Regression", "Performance", "Arrow", "Strings",
+          "Missing-data", "Indexing", "Datetime", "IO CSV", "Groupby"]
+
+[[repos]]
+repo = "psf/black"
+labels = ["T: bug", "T: style", "T: enhancement", "T: documentation", "F: strings", "F: linebreak",
+          "F: docstrings", "C: preview style", "C: configuration", "C: crash", "C: packaging", "C: maintenance"]
+
+[[repos]]
+repo = "pydantic/pydantic"
+labels = ["bug V2", "bug V1", "feature request", "question", "documentation", "topic-mypy plugin",
+          "topic-generics", "topic-performance", "topic-json schema", "topic-serialization",
+          "topic-validators-serializers", "topic-annotations"]
+
+[[repos]]
+repo = "pypa/pip"
+labels = ["type: bug", "type: feature request", "type: support", "type: maintenance", "type: docs",
+          "type: enhancement", "type: deprecation", "type: performance", "C: error messages",
+          "C: dependency resolution", "C: network connectivity", "project: vendored dependency"]
+
+[[repos]]
+repo = "python-poetry/poetry"
+labels = ["kind/bug", "kind/feature", "kind/question", "area/docs", "area/installer", "area/solver",
+          "area/core", "area/cli", "area/deps", "area/venv", "area/sources", "area/vcs"]
