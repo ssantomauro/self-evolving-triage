@@ -87,6 +87,11 @@ pre { background: var(--soft); border-radius: 8px; padding: 14px 16px; overflow-
 </header>
 
 <section class="col">
+  <p>A few weeks ago I set out to dig deeper into decision models. At first, short on time, I had simply confined them to classification. OK, I know, that's what they're for, and being able to use them for that is already a great result :D Still, I had a feeling there could be something more, but I couldn't picture what.</p>
+  <p>Then I started experimenting a little, not so much to find the application of the year built on decision models, but mostly to begin understanding their limits and their potential. In this article I want to share the first experiment, and more will certainly follow. My hope is to start a virtuous circle and get others to experiment and find interesting applications. And of course, I'm always open to constructive feedback!</p>
+</section>
+
+<section class="col">
   <h2>The idea</h2>
   <p>Most product logic is a pile of <code>if</code> statements. Someone watches how users behave, decides the rules are wrong, edits the code and ships it. The software only gets smarter when a developer does.</p>
   <p>Decision models like <a href="https://docs.levanto.ai">Levanto Sage 2</a> change what that logic can be. Sage takes some content and a question and returns a structured answer with a probability, in milliseconds, for a fraction of a cent. You can call it wherever you'd write an <code>if</code>. The rules it follows are plain-English instructions and definitions, which means they are <em>data</em>.</p>
