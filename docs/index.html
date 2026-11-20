@@ -83,6 +83,7 @@ pre { background: var(--soft); border-radius: 8px; padding: 14px 16px; overflow-
   <h1>Software that rewrites its own rules</h1>
   <p class="dek">A decision model makes every call. An LLM reads the mistakes and proposes better rules. The software tests each proposal on its own history and keeps it only if it works. Nobody edits the code.</p>
   <div class="byline">Code and data: <a href="https://github.com/ssantomauro/self-evolving-triage">github.com/ssantomauro/self-evolving-triage</a></div>
+  <p class="callout"><strong>The goal is to experiment with an approach, not to build the best code.</strong> Issue labelling is just a convenient place to watch the loop work. None of the versions here is tuned to win, and a well-tuned ML model could beat them all. That's fine: the numbers are here to show the loop working, not to rank decision models against ML.</p>
 </header>
 
 <section class="col">
@@ -90,7 +91,6 @@ pre { background: var(--soft); border-radius: 8px; padding: 14px 16px; overflow-
   <p>Most product logic is a pile of <code>if</code> statements. Someone watches how users behave, decides the rules are wrong, edits the code and ships it. The software only gets smarter when a developer does.</p>
   <p>Decision models like <a href="https://docs.levanto.ai">Levanto Sage 2</a> change what that logic can be. Sage takes some content and a question and returns a structured answer with a probability, in milliseconds, for a fraction of a cent. You can call it wherever you'd write an <code>if</code>. The rules it follows are plain-English instructions and definitions, which means they are <em>data</em>.</p>
   <p>And data can be rewritten by a program. Pair the decision model with an LLM that reads where the decisions went wrong and proposes new instructions, add a test that only lets better instructions through, and you get software whose behaviour improves from how people use it. This experiment builds that loop and lets it run.</p>
-  <p class="callout">This isn't a benchmark. The point is to show the mechanism working on real data, and to make you think about where else it could live.</p>
 </section>
 
 <section class="col">
