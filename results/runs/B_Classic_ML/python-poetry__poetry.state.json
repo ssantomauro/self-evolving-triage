@@ -1,0 +1,20 @@
+{
+  "bot": "B. Classic ML",
+  "repo": "python-poetry/poetry",
+  "seconds": 15.8,
+  "trained_labels": [
+    "area/cli",
+    "area/core",
+    "area/deps",
+    "area/docs",
+    "area/installer",
+    "area/solver",
+    "area/sources",
+    "area/vcs",
+    "area/venv",
+    "kind/bug",
+    "kind/feature",
+    "kind/question"
+  ],
+  "examples": 1458
+}

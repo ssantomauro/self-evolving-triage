@@ -1,0 +1,223 @@
+{
+  "bot": "D. Sage + learner",
+  "repo": "psf/black",
+  "seconds": 2730.7,
+  "instructions": "Decide which labels psf/black maintainers would apply. Almost always exactly one T: label; C:/F: labels are rare, so omit them unless clearly central. Wrong, inconsistent, or crashing output (cannot parse, internal errors, AST non-equivalence, unwanted preview changes, CI/build/wheel failures) \u2192 T: bug, usually alone. Requests for new behavior or options, even in bug or style templates \u2192 T: enhancement. Layout proposals \u2192 T: style. Questions \u2192 T: documentation. When unsure, omit C:/F:.",
+  "definitions": {
+    "T: bug": "Wrong or inconsistent output, parse failures, internal errors, line-ranges bugs, preview changes that look wrong, broken CI/doc builds, missing or broken compiled wheels, junk bug-template reports. Includes split inconsistencies filed as style.",
+    "T: style": "Proposals for different stable layout or extending a preview feature to more cases (hugging, splitting, blank lines). Not inconsistent/unexpected splits (T: bug) or opt-out/new-behavior requests (T: enhancement).",
+    "T: enhancement": "New features or behavior changes: options, file handling (symlinks, per-directory config), not formatting certain code, adding syntax like walrus parens, FIPS support, Docker/compilation improvements, release automation scripts, CI speedups.",
+    "T: documentation": "Docs fixes/additions and questions about Black or its process (e.g. preview promotion roadmap, how to contribute). Not CI doc-build failures (T: bug).",
+    "F: strings": "Only for preview/experimental string processing behavior (splitting, merging, wrapping concatenated strings, comments moved by it). Not stable-style long strings, f-string parsing, or quotes.",
+    "F: linebreak": "Rare. Line-splitting issues where the split choice itself is central: lists exploded unnecessarily, assignment value/target break rules, wrapping new-syntax signatures. Not comment placement bugs or most preview hugging proposals.",
+    "F: docstrings": "Almost never. Only docstring content formatting proposals; not crashes involving docstring-like strings (T: bug).",
+    "C: preview style": "Bug reports that a specific --preview feature produces undesirable or broken output (paired with T: bug). Not style proposals extending preview, not line-ranges, not stable-style bugs.",
+    "C: configuration": "Essentially never applied; include/exclude regex changes and per-directory config requests are T: bug/T: enhancement alone.",
+    "C: crash": "Very rare; only for AST-equivalence crashes triggered by a preview feature. Cannot-parse errors, internal errors, and f-string parse failures get T: bug alone.",
+    "C: packaging": "Essentially never applied; mypyc wheel problems are T: bug, Docker compile requests are T: enhancement.",
+    "C: maintenance": "Internal infrastructure work: test-suite tooling (e.g. inline test flags), Docker CI build pipeline, Windows doc-build CI fixes. Release scripts are T: enhancement; most CI failures are T: bug alone."
+  },
+  "cutoffs": {
+    "T: bug": 0.9,
+    "T: style": 0.7,
+    "T: enhancement": 0.7,
+    "T: documentation": 0.9,
+    "C: configuration": 0.65,
+    "C: packaging": 0.25,
+    "F: strings": 0.1,
+    "F: linebreak": 0.7,
+    "C: crash": 0.7,
+    "C: maintenance": 0.7,
+    "F: docstrings": 0.1,
+    "C: preview style": 0.65
+  },
+  "spec_log": [
+    {
+      "at_issue": 0,
+      "event": "initial",
+      "instructions": "This is a new GitHub issue filed in the psf/black repository. Decide which labels the maintainers would apply to it. A label applies only when the issue is clearly about that topic.",
+      "definitions": {
+        "T: bug": "Something isn't working",
+        "T: style": "What do we want Blackened code to look like?",
+        "T: enhancement": "New feature or request",
+        "T: documentation": "Improvements to the docs (e.g. new topic, correction, etc)",
+        "F: strings": "Related to our handling of strings",
+        "F: linebreak": "How should we split up lines?",
+        "F: docstrings": "How we format docstrings",
+        "C: preview style": "Issues with the preview and unstable style. Add the name of the responsible feature in the title.",
+        "C: configuration": "CLI and configuration",
+        "C: crash": "Black is crashing",
+        "C: packaging": "Installation and packaging of Black",
+        "C: maintenance": "Related to project maintenance, e.g. CI, testing, policy changes, releases"
+      }
+    },
+    {
+      "at_issue": 160,
+      "event": "accepted",
+      "holdout_f1_current": 0.7574,
+      "holdout_f1_candidate": 0.8088,
+      "instructions": "This is a new GitHub issue filed in the psf/black repository. Decide which labels the maintainers would apply. Be conservative: apply a label only when the issue clearly fits its definition, and most issues get just one label. Prefer the T: type label (bug, style, enhancement, documentation) and add F:/C: labels only when the definition explicitly matches. Internal errors, parse failures and unstable formatting are plain 'T: bug', not 'C: crash'.",
+      "definitions": {
+        "T: bug": "Black misbehaves: internal errors (unstable second pass, non-equivalent/invalid output), failure to parse valid code, hangs, options not working, formatting clearly inconsistent with documented behavior, doc mistakes like duplicated content.",
+        "T: style": "Proposals or complaints about how Blackened code should look (ugly/unreadable output, desired alternative formatting) where Black works as designed. Use instead of enhancement for formatting-output requests; not for crashes/errors.",
+        "T: enhancement": "New features or options for Black's tooling/CLI/integrations. Not for requests to change formatting output (use T: style) and not for removal of features.",
+        "T: documentation": "Requests to add or correct documentation, help text, or listings (e.g. projects using Black, explaining how to pass stdin). Not for issues where a feature itself is broken.",
+        "F: strings": "Specifically about how Black handles string literals (quotes, prefixes, string splitting/concatenation as a style topic). Rarely applied; not for bugs that merely involve strings.",
+        "F: linebreak": "Style discussions specifically about where/how Black splits lines. Rarely applied; do not add to general bug reports involving long lines.",
+        "F: docstrings": "Style discussions about how Black formats docstrings. Rarely applied; not for crash/error reports that happen to involve docstrings.",
+        "C: preview style": "Issues explicitly about the --preview or unstable style features.",
+        "C: configuration": "Problems or questions about configuration files (pyproject.toml keys/values) or how config is loaded, e.g. config errors under pre-commit. Not for an option simply not working in an editor (T: bug) or help-text wording (T: documentation).",
+        "C: crash": "Almost never applied to new reports. Do NOT use for INTERNAL ERROR, unstable formatting, non-equivalent code, parse failures, or hangs\u2014those are T: bug.",
+        "C: packaging": "Installation, distribution, and bundled integrations of Black (e.g. editor plugins shipped in the repo, wheels, dependencies), including proposals to drop or move them.",
+        "C: maintenance": "Project maintenance: CI, test suite, fuzzing infrastructure, release process, policy changes. Not for bugs found by the fuzzer (T: bug)."
+      }
+    },
+    {
+      "at_issue": 320,
+      "event": "rejected",
+      "holdout_f1_current": 0.773,
+      "holdout_f1_candidate": 0.6915,
+      "instructions": "Decide which labels psf/black maintainers would apply to this new issue. Usually apply one T: type label plus any matching area labels (F:/C:). Area labels are applied fairly often: always add F: strings for anything string/docstring/string-processing related, and C: configuration for CLI input, file discovery, stdin, and error-message handling. Some area issues (regressions in file discovery, string-processing performance) get only the area label, no T: label. Follow the definitions closely.",
+      "definitions": {
+        "T: bug": "Black produces wrong results: parse failures on valid code, internal errors, crashes, broken releases/GitHub Action, output contradicting documented behavior. Not for layout preferences, file-discovery/config regressions (C: configuration only), or unfriendly error messages (enhancement).",
+        "T: style": "Complaints or proposals about the layout of formatted code (blank lines, parens, trailing/magic commas, splitting, wrapping) where Black works as designed. Also when a proposal changes default formatting output (e.g. making a string-processing mode default, notebook formatting).",
+        "T: enhancement": "New features, options, or behaviors: CLI/tooling/library improvements, friendlier error messages, primer/test tooling, dependency replacements, new code transformations (e.g. rewriting print statements, adding parens), comment interplay with fmt:skip, string-processing feature extensions.",
+        "T: documentation": "Docs content or docs build: missing/incorrect instructions (including plugin installation instructions), help text, man page/Sphinx build failures, listings. Use instead of C: packaging when the problem is docs.",
+        "F: strings": "Anything involving string literals or docstrings: quotes, prefixes, f-strings, parens around strings, docstring formatting/length, experimental string processing (crashes, performance, features). Apply alongside T: bug/style/enhancement.",
+        "F: linebreak": "Rare. Only for how Black splits expressions across lines around operators or concatenations (e.g. inconsistent wrapping of concatenated comprehensions, splitting at operators). Not for magic/trailing commas, method-call splits, or comment/docstring length.",
+        "F: docstrings": "Style discussions about how Black formats docstrings. Rarely applied; not for crash/error reports that happen to involve docstrings.",
+        "C: preview style": "Issues explicitly about the --preview style features.",
+        "C: configuration": "How Black is invoked and finds input: pyproject.toml parsing, CLI arguments (SRC/--code, --stdin-filename), stdin handling, file inclusion/exclusion (venv, .gitignore), module shadowing, error-message presentation. Regressions here often get only this label.",
+        "C: crash": "Black aborts with an error or traceback: INTERNAL ERROR, 'cannot format' errors, string-processing crashes, failing to run at all in CI/Action. Add together with T: bug.",
+        "C: packaging": "Distribution and dependencies: pinned/unsupported dependency versions (click, toml library failures), wheels, self-contained binaries (size, universal2 builds). Not for docs on plugins, GitHub Action breakage (T: bug), or replacing a library in code (enhancement).",
+        "C: maintenance": "Project upkeep: CI workflows, primer/fuzzing infrastructure changes, release process, pre-commit hook integration problems. Not for binary builds (C: packaging) or primer test additions concerning stdin (C: configuration)."
+      }
+    },
+    {
+      "at_issue": 480,
+      "event": "rejected",
+      "holdout_f1_current": 0.7927,
+      "holdout_f1_candidate": 0.7429,
+      "instructions": "This is a new GitHub issue filed in psf/black. Decide which labels the maintainers would apply. Usually choose exactly one T: label (bug, style, enhancement, documentation), and add C:/F: labels only when they clearly match the definitions below. Complaints about formatting output are T: style even if the reporter calls them bugs. F: labels are rare: never add F: linebreak to style complaints. C: crash means Black aborts with a Python traceback/exception, not an INTERNAL ERROR.",
+      "definitions": {
+        "T: bug": "Black malfunctions: tracebacks, broken installs/imports from dependencies, non-equivalent/unstable output, mangled code, failure to parse supported syntax, broken CI/builds, file discovery (gitignore) errors, or a stale branch/lockfile breaking setup.",
+        "T: style": "Complaints or proposals about how formatted code looks (line splitting, ugly/surprising wrapping, indentation, brackets, comments, tabs), even if called 'incorrect' or a 'bug', when Black runs without errors.",
+        "T: enhancement": "New capabilities: new flags/options, support for new syntax by default, better error messages/locations, quieter warnings, formatting things Black currently ignores (e.g. comment contents), tooling like primer options, project-participation ideas.",
+        "T: documentation": "Requests to add or fix documentation text, help text or listings only. Not when docs instructions fail because of a missing branch/release artifact (that's T: bug + C: maintenance).",
+        "F: strings": "Bugs or requests about string literal handling: quote normalization, string prefixes, multiline/f-strings, long strings not wrapped or split. Add alongside T: bug when the misbehavior centers on string literals.",
+        "F: linebreak": "Very rare. Only alongside T: bug where Black inconsistently wraps or refuses to wrap lines. Never add to T: style issues about where lines split.",
+        "F: docstrings": "Specifically about docstring formatting (indentation, quotes, whitespace in docstrings). Rare.",
+        "C: preview style": "Issues explicitly about --preview or experimental/unstable style features.",
+        "C: configuration": "Options and configuration: pyproject.toml keys, missing config-file support for a flag, --exclude/--include behavior with paths, proposals for new CLI flags, error-reporting options. Often the only label for option-behavior questions.",
+        "C: crash": "Black or its Vim plugin fails to run with a Python exception/traceback (ImportError from dependencies, OSError on filesystem, plugin errors). Not INTERNAL ERROR, non-equivalent or unstable output.",
+        "C: packaging": "Narrow: built distribution artifacts \u2014 wheels for specific platforms, Docker images, build containers. Not for dependency version/import errors, Vim plugin issues, or lockfiles.",
+        "C: maintenance": "Project upkeep: CI workflows, lockfiles (Pipfile.lock), release branches/tags (e.g. 'stable' branch), black-primer/fuzz tooling, repository labels/events, test suite."
+      }
+    },
+    {
+      "at_issue": 640,
+      "event": "accepted",
+      "holdout_f1_current": 0.7468,
+      "holdout_f1_candidate": 0.8,
+      "instructions": "Decide which labels psf/black maintainers would apply to this new issue. Usually one T: label, plus a C:/F: label when clearly relevant. Follow the issue template: 'Describe the bug' \u2192 T: bug (even for formatting output complaints); 'Describe the style change' \u2192 T: style; 'Is your feature request related to a problem' \u2192 T: enhancement. User support questions go to T: documentation. Off-topic or unrelated reports get T: bug. Apply C: crash when Black fails to parse valid code.",
+      "definitions": {
+        "T: bug": "Bug-template reports: wrong or inconsistent output (spacing, commas), errors, hangs, import/dependency breakage, options not working, editor integration failures. Also off-topic/unrelated or joke reports. Not for version-detection improvements (enhancement).",
+        "T: style": "Issues using the style-change template proposing different layout of formatted code (line breaking, magic trailing comma, parentheses, docstring layout). Not for bug-template reports, nor feature-request-template asks for new transformations (enhancement).",
+        "T: enhancement": "Feature requests: new options, config behaviors, CLI output, integrations (LSP/editor extensions, Docker), version-detection improvements, and new code transformations requested via feature template (remove brackets, fix comments, add annotations, fmt: skip handling, splitting lines).",
+        "T: documentation": "Documentation additions/corrections, licensing/SPDX notes, and user support questions (how-to, install help, compatibility with flake8 rules) that are answered by pointing to docs rather than code changes.",
+        "F: strings": "String literal handling: quotes, prefixes, f-strings, implicit concatenation, string splitting/merging. Not for docstrings (those are F: docstrings or F: linebreak).",
+        "F: linebreak": "Black leaves lines too long or splits them suboptimally: unsplit long dict values, docstring/line-length wrapping, multi-line string-break alignment. Not for magic-trailing-comma, parentheses removal or general expression-nesting style issues.",
+        "F: docstrings": "Style discussions about docstring formatting such as indentation, quotes and whitespace inside docstrings. Rarely applied; docstring line-length wrapping is F: linebreak instead.",
+        "C: preview style": "Issues explicitly about the --preview or experimental string processing style features where that mode is the central topic.",
+        "C: configuration": "Requests or problems about how config is found/loaded (pyproject.toml discovery), new config/CLI options like target-version or version checks. Not for a single config key like exclude not working (plain T: bug).",
+        "C: crash": "Black fails to parse valid Python code ('cannot parse' errors); pair with T: bug. Not for unstable formatting, non-equivalent output or general errors.",
+        "C: packaging": "Distribution artifacts: mypyc-compiled wheels (segfaults, runtime type errors), Docker images, dependency pinning proposals. Not for user's own install or editor setup failures or ImportErrors from dependencies (T: bug).",
+        "C: maintenance": "Project maintenance: CI, tests, fuzzing, release process, policy, and ecosystem coordination like official editor/LSP extensions maintained by others. Not for bugs found by fuzzer."
+      }
+    },
+    {
+      "at_issue": 800,
+      "event": "rejected",
+      "holdout_f1_current": 0.7623,
+      "holdout_f1_candidate": 0.7549,
+      "instructions": "Decide which labels psf/black maintainers would apply. Usually one T: label plus C:/F: labels only when clearly central; F: labels are applied sparingly. Templates guide but don't decide: proposals to change intentional formatting are T: style even in bug template; inconsistent/erratic formatting is T: bug even in style template. Off-topic, joke, or community-project posts get T: enhancement. CI/release/build-dependency issues may have only C: labels, no T: label. User 'how do I' questions \u2192 T: documentation.",
+      "definitions": {
+        "T: bug": "Black misbehaves: wrong/inconsistent output, errors, failures running, broken docs builds, test failures seen by packagers, GitHub Action failures, unreachable code, linter-interaction complaints. Not for deliberate-style disagreements (style) or pure CI/build-dependency issues.",
+        "T: style": "Requests to change Black's intended code style (trailing commas, wrapping single imports, union line breaks, concatenated-string parens, tabular layout, statement ordering), any template. Feature-template layout asks get both enhancement and style. Inconsistent formatting is bug.",
+        "T: enhancement": "Feature requests: new options/flags (e.g. skip first line), new pragma comments, better error messages, integrations, GitHub Action features, version support tracking. Also off-topic, joke, or ecosystem/community-project posts.",
+        "T: documentation": "Requests for clearer or more complete docs/examples, and user questions on how to use or configure Black (config examples, action versioning, trailing-comma options). Not for broken docs builds/warnings (T: bug).",
+        "F: strings": "Rare. Bugs where string literals themselves trigger the problem: f-string parsing quirks, string handling causing recursion/crashes. Not for non-Python files, string-concatenation style proposals, or preview crashes merely involving strings.",
+        "F: linebreak": "Rare. Only when line-length computation or split placement is the core subject: comments counted in length, closing docstring quotes moved, type hints wrapped oddly. Not for generic too-long lines, dict values, member access, imports, or unions.",
+        "F: docstrings": "Any issue where docstrings are involved: docstring formatting, quotes, indentation, line length of docstrings, crashes or failed reformatting caused by docstring content (backslashes, escapes). Often paired with T: bug.",
+        "C: preview style": "Issues explicitly about --preview / experimental string processing features where that mode is the central topic, not crashes merely reproduced with --preview.",
+        "C: configuration": "Only problems with how configuration is found or loaded (pyproject.toml discovery, config file precedence). Not for new CLI flags, pragma comments, target-version error messages, or questions about config docs.",
+        "C: crash": "Black crashes or cannot run: tracebacks, recursion errors, ImportError/wrong-architecture compiled wheels, crashes in --preview. Not for consistent 'cannot parse' errors on f-strings or docstring-content crashes labeled with F: labels.",
+        "C: packaging": "Distribution and build: wheels (mypyc, architecture), release/publishing workflows, build-backend dependencies (hatchling), new Python version support, Docker images, dependency pins. Build-dependency install failures get this alone.",
+        "C: maintenance": "Internal project upkeep: CI, test dependencies breaking CI, release automation, Python version support tracking. Not for downstream test failures, code-quality nits, GitHub Action bugs or feature requests, or user questions."
+      }
+    },
+    {
+      "at_issue": 960,
+      "event": "accepted",
+      "holdout_f1_current": 0.7312,
+      "holdout_f1_candidate": 0.7857,
+      "instructions": "Decide which labels psf/black maintainers would apply. Usually one T: label; add C:/F: labels sparingly and only when the topic is central. Follow the template: 'Describe the bug' \u2192 T: bug; 'Describe the style change' \u2192 T: style; feature-request template \u2192 T: enhancement. Off-topic rants about Black's style \u2192 T: style. Empty or contribution/how-to questions \u2192 T: documentation. Template-less playground reports of a bad line split may get only F: linebreak. When unsure, omit F:/C: labels.",
+      "definitions": {
+        "T: bug": "Bug-template reports: inconsistent or wrong output, errors, blackd failures, incorrect inference (requires-python, project root), failing tests against new dependencies, preview regressions to undo. Not off-topic rants (T: style) or 'fmt: skip should cover this' asks (enhancement).",
+        "T: style": "Style-change template proposals for different formatted layout (splitting, parentheses, trailing commas, blank lines, docstring spacing), preview-style feature feedback, and off-topic/joke complaints about Black's style. Not bug-template reports.",
+        "T: enhancement": "Feature requests: new options/CLI flags, listing targeted files, showing version in logs/actions, fmt: skip extensions, tolerating invalid type comments, directive/comment handling changes even if filed as bug, integrations, Docker.",
+        "T: documentation": "Docs corrections/additions (incl. outdated tool-compatibility guides), confusing behavior that needs documenting, empty or 'how can I contribute' issues, and support questions answered by docs. Not requests for new output or features (enhancement).",
+        "F: strings": "Rarely applied: only for experimental/preview string-processing (string splitting/merging) layout issues. Not for quote normalization, escapes, f-string errors, implicit concatenation style, or strings exceeding line length in stable style.",
+        "F: linebreak": "Rarely applied. For line-splitting bugs from trailing comma/comment interaction, removed context-manager parens, argument hugging, and import wrapping docs. Not for most style proposals or bug reports about splits (T: style/T: bug alone).",
+        "F: docstrings": "Very rarely applied; only for docstring content formatting (indentation, quotes inside docstrings). Not for blank lines before docstrings (T: style alone).",
+        "C: preview style": "Feedback on a specific feature already in --preview (e.g. escape casing, preview string processing output), or preview regressions. Not for proposals that merely mention preview.",
+        "C: configuration": "Config file discovery giving different results depending on invocation path, or pyproject value type pitfalls (e.g. arrays for regex options). Not for project-root inference, requires-python inference, --config bugs, or file-listing features.",
+        "C: crash": "Black crashes or fails with 'cannot parse' on valid Python syntax. Not for type-comment ast errors, comments containing 'type:', invalid code, or unstable/non-equivalent output.",
+        "C: packaging": "Distribution artifacts: mypyc-compiled wheels (segfaults, runtime type errors), Docker images, dependency pinning proposals. Not user install/editor setup failures or dependency ImportErrors (T: bug).",
+        "C: maintenance": "Project maintenance proposals: CI setup, fuzzing, release process, policy, ecosystem coordination. Not test failures caused by dependency updates (T: bug) or bugs found by the fuzzer."
+      }
+    },
+    {
+      "at_issue": 1120,
+      "event": "accepted",
+      "holdout_f1_current": 0.7727,
+      "holdout_f1_candidate": 0.8258,
+      "instructions": "Decide which labels psf/black maintainers would apply. Almost always exactly one T: label; C:/F: labels are rare, so omit them unless clearly central. Wrong, inconsistent, or crashing output (cannot parse, internal errors, AST non-equivalence, unwanted preview changes, CI/build/wheel failures) \u2192 T: bug, usually alone. Requests for new behavior or options, even in bug or style templates \u2192 T: enhancement. Layout proposals \u2192 T: style. Questions \u2192 T: documentation. When unsure, omit C:/F:.",
+      "definitions": {
+        "T: bug": "Wrong or inconsistent output, parse failures, internal errors, line-ranges bugs, preview changes that look wrong, broken CI/doc builds, missing or broken compiled wheels, junk bug-template reports. Includes split inconsistencies filed as style.",
+        "T: style": "Proposals for different stable layout or extending a preview feature to more cases (hugging, splitting, blank lines). Not inconsistent/unexpected splits (T: bug) or opt-out/new-behavior requests (T: enhancement).",
+        "T: enhancement": "New features or behavior changes: options, file handling (symlinks, per-directory config), not formatting certain code, adding syntax like walrus parens, FIPS support, Docker/compilation improvements, release automation scripts, CI speedups.",
+        "T: documentation": "Docs fixes/additions and questions about Black or its process (e.g. preview promotion roadmap, how to contribute). Not CI doc-build failures (T: bug).",
+        "F: strings": "Only for preview/experimental string processing behavior (splitting, merging, wrapping concatenated strings, comments moved by it). Not stable-style long strings, f-string parsing, or quotes.",
+        "F: linebreak": "Rare. Line-splitting issues where the split choice itself is central: lists exploded unnecessarily, assignment value/target break rules, wrapping new-syntax signatures. Not comment placement bugs or most preview hugging proposals.",
+        "F: docstrings": "Almost never. Only docstring content formatting proposals; not crashes involving docstring-like strings (T: bug).",
+        "C: preview style": "Bug reports that a specific --preview feature produces undesirable or broken output (paired with T: bug). Not style proposals extending preview, not line-ranges, not stable-style bugs.",
+        "C: configuration": "Essentially never applied; include/exclude regex changes and per-directory config requests are T: bug/T: enhancement alone.",
+        "C: crash": "Very rare; only for AST-equivalence crashes triggered by a preview feature. Cannot-parse errors, internal errors, and f-string parse failures get T: bug alone.",
+        "C: packaging": "Essentially never applied; mypyc wheel problems are T: bug, Docker compile requests are T: enhancement.",
+        "C: maintenance": "Internal infrastructure work: test-suite tooling (e.g. inline test flags), Docker CI build pipeline, Windows doc-build CI fixes. Release scripts are T: enhancement; most CI failures are T: bug alone."
+      }
+    },
+    {
+      "at_issue": 1280,
+      "event": "rejected",
+      "holdout_f1_current": 0.7532,
+      "holdout_f1_candidate": 0.6519,
+      "instructions": "Decide which labels psf/black maintainers would apply. Usually exactly one T: label. Wrong/inconsistent output, Black not doing what users expect (long lines/strings left unsplit, redundant parens kept, blank lines removed), test-suite or CI failures \u2192 T: bug. New options/features or removing parentheses proposals \u2192 T: enhancement. Layout proposals (incl. import sorting, docstring indentation) \u2192 T: style; style-template reports of a real bug may get T: bug + T: style. Add C: crash for any Black error/failure on valid code. Omit F:/C: unless clearly fitting.",
+      "definitions": {
+        "T: bug": "Wrong, inconsistent, or unexpected output; crashes, parse/AST-safety errors; long lines or strings not split; redundant parens kept; CLI output issues; test-suite/CI/wheel failures; inefficient file discovery. Not proposals for new layout.",
+        "T: style": "Proposals for different formatting layout: splitting, hugging, blank lines, concatenated string parenthesization, import sorting, docstring re-indentation. Also added to style-template reports that are bugs. Not unexpected/inconsistent behavior alone (T: bug).",
+        "T: enhancement": "New features, options (e.g. quote style), removing redundant parentheses in new places, f-string internal formatting, file-handling, Docker/compilation, release scripts. Not complaints that existing behavior (line length, gitignore, string splitting) is broken (T: bug).",
+        "T: documentation": "Docs fixes/additions and pure questions about Black's process. Not users reporting that line-length or formatting doesn't work as expected (T: bug).",
+        "F: strings": "String-related formatting requests: quote style options, f-string internal formatting, implicit concatenated string layout, preview string processing. Not reports that a long string isn't split (T: bug alone).",
+        "F: linebreak": "Only with T: style proposals about where to split long expressions (e.g. concatenated comprehensions one per line). Not bug reports about splits, magic trailing comma, assert splitting, or type-parameter generics.",
+        "F: docstrings": "Bug reports where Black fails or misbehaves on a docstring's content. Not docstring indentation/layout proposals (T: style alone).",
+        "C: preview style": "Rare. Only when the issue is explicitly about a specific --preview feature's undesirable output. Not for reports of long strings not split even if --preview was used.",
+        "C: configuration": "Bugs in CLI flags/option interaction or output behavior (e.g. --quiet with --check suppressing errors). Not include/exclude or gitignore efficiency issues.",
+        "C: crash": "Black errors out on valid code: cannot parse (including after its own reformatting), indentation errors, internal errors, ASTSafetyError/equivalence failures, producing invalid code. Pair with T: bug.",
+        "C: packaging": "Essentially never applied; wheel problems are T: bug, Docker compile requests are T: enhancement.",
+        "C: maintenance": "Rare. Internal infrastructure work proposals (test tooling, Docker CI pipeline). Failing or flaky tests, pytest errors, and CI failures are T: bug alone."
+      }
+    }
+  ]
+}

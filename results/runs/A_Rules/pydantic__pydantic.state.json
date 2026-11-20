@@ -1,0 +1,81 @@
+{
+  "bot": "A. Rules",
+  "repo": "pydantic/pydantic",
+  "seconds": 0.5,
+  "bug V2": [
+    "\\bbug\\b",
+    "\\berror\\b",
+    "exception",
+    "traceback",
+    "\\bcrash",
+    "doesn'?t work",
+    "\\bbroken\\b",
+    "\\bfails?\\b",
+    "unexpected",
+    "incorrect",
+    "wrong"
+  ],
+  "bug V1": [
+    "\\bbug\\b",
+    "\\berror\\b",
+    "exception",
+    "traceback",
+    "\\bcrash",
+    "doesn'?t work",
+    "\\bbroken\\b",
+    "\\bfails?\\b",
+    "unexpected",
+    "incorrect",
+    "wrong"
+  ],
+  "feature request": [
+    "feature request",
+    "\\bfeature\\b",
+    "would be nice",
+    "\\bsupport for\\b",
+    "\\badd (a|an|support)\\b",
+    "\\ballow\\b",
+    "\\bproposal\\b",
+    "\\benhancement\\b"
+  ],
+  "question": [
+    "^how (do|can|to|should)\\b",
+    "\\bquestion\\b",
+    "\\bis it possible\\b",
+    "\\bhelp\\b"
+  ],
+  "documentation": [
+    "\\bdocs?\\b",
+    "documentation",
+    "readme",
+    "\\btypo\\b",
+    "docstring example"
+  ],
+  "topic-mypy plugin": [
+    "\\bmypy"
+  ],
+  "topic-generics": [
+    "\\bgeneric"
+  ],
+  "topic-performance": [
+    "\\bslow\\b",
+    "performance",
+    "\\bspeed\\b",
+    "memory usage",
+    "takes too long"
+  ],
+  "topic-json schema": [
+    "\\bjson",
+    "\\bschema"
+  ],
+  "topic-serialization": [
+    "\\bserialization"
+  ],
+  "topic-validators-serializers": [
+    "\\bvalidator",
+    "\\bserializer"
+  ],
+  "topic-annotations": [
+    "\\bannotation"
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "bot": "D. Sage + learner",
+  "repo": "pandas-dev/pandas",
+  "seconds": 2283.4,
+  "instructions": "Decide which labels pandas maintainers would apply. Use the title prefix as the primary type: BUG\u2192Bug, ENH/TYP\u2192Enhancement, DOC\u2192Docs, PERF\u2192Performance. A BUG-titled issue about slowness gets Performance, not Bug. Add topic labels sparingly, only when that topic is the core subject. Incidental mentions of NaN, dates, pyarrow, groupby, loc, or reindex do not justify a topic label. When unsure about a topic label, omit it.",
+  "definitions": {
+    "Bug": "Default for BUG-titled reports of wrong results, errors, crashes, or connection/install failures, even if the cause is unclear. Omit when maintainers would treat it as expected or documented behavior (use Docs), or when it is about slowness or new platform support.",
+    "Enhancement": "ENH/TYP requests for new functionality, better error messages, API changes, or support for new Python versions/builds such as free-threading. Use Enhancement alone for ENH issues. Do not add Performance just because a costly step is mentioned.",
+    "Docs": "DOC issues, website outages, and 'bug' reports that describe expected but surprising behavior (rounding, return types, apply results), which need clarified docs. Not for conda/packaging availability problems.",
+    "Regression": "Only when the issue states it worked in a specific earlier pandas version, or blames a named PR. Merely naming the version currently used, or a long-standing bug, does not count.",
+    "Performance": "Issue primarily reports slowness or excessive memory use (PERF titles, or BUG titles complaining about poor performance). Not for ENH requests that merely propose skipping a costly step.",
+    "Arrow": "Core subject is ArrowDtype/pyarrow-backed dtypes behaving badly, including slowness with ArrowDtype-wrapped types. Not for exotic pyarrow extension types (e.g. json), or datetime comparisons where Datetime applies.",
+    "Strings": "String-related issues: StringDtype, the default string dtype, Arrow string types, and .str accessor methods such as replace with regex/capture groups.",
+    "Missing-data": "Issues where NaN/NA handling is central: skipna parameters (including performance of skipna), NaN values causing failures in alignment or arithmetic. Not for masking or filling with pd.NA in nullable dtypes.",
+    "Indexing": "Index/MultiIndex structure and alignment problems (misaligned MultiIndex in arithmetic, set_index behavior). Not for query, where/mask, reindex, or boolean mask operator issues.",
+    "Datetime": "Datetime parsing and datetime64 comparison issues, e.g. to_datetime input conversion, datetime64 vs pyarrow timestamps. Not for concat/join on DatetimeIndex, dtype changes on assignment, timezones, or timedeltas.",
+    "IO CSV": "Bugs or features specific to read_csv/to_csv behavior. Not for generic IO requests spanning several formats.",
+    "Groupby": "Issues where groupby logic itself is the problem or subject (e.g. groupby ops, skipna in groupby regressions). Not when slowness stems from a dtype like ArrowDtype used inside groupby."
+  },
+  "cutoffs": {
+    "Bug": 0.25,
+    "Enhancement": 0.8,
+    "Docs": 0.9,
+    "Arrow": 0.9,
+    "Strings": 0.1,
+    "Missing-data": 0.4,
+    "Groupby": 0.1,
+    "Performance": 0.1,
+    "Indexing": 0.8,
+    "Datetime": 0.3,
+    "IO CSV": 0.1,
+    "Regression": 0.4
+  },
+  "spec_log": [
+    {
+      "at_issue": 0,
+      "event": "initial",
+      "instructions": "This is a new GitHub issue filed in the pandas-dev/pandas repository. Decide which labels the maintainers would apply to it. A label applies only when the issue is clearly about that topic.",
+      "definitions": {
+        "Bug": "",
+        "Enhancement": "",
+        "Docs": "",
+        "Regression": "Functionality that used to work in a prior pandas version",
+        "Performance": "Memory or execution speed performance",
+        "Arrow": "pyarrow functionality",
+        "Strings": "String extension data type and string data",
+        "Missing-data": "np.nan, pd.NaT, pd.NA, dropna, isnull, interpolate",
+        "Indexing": "Related to indexing on series/frames, not to indexes themselves",
+        "Datetime": "Datetime data dtype",
+        "IO CSV": "read_csv, to_csv",
+        "Groupby": ""
+      }
+    },
+    {
+      "at_issue": 160,
+      "event": "accepted",
+      "holdout_f1_current": 0.7979,
+      "holdout_f1_candidate": 0.8402,
+      "instructions": "Decide which labels pandas maintainers would apply to this new issue. Maintainers label sparingly: usually only the issue type (Bug, Enhancement, Docs, Performance) plus a topic label only when that topic is the core subject. Merely mentioning dates, NaN, pyarrow, strings, or CSV in an example does not justify a topic label. When unsure about a topic label, omit it. Prefix hints: BUG\u2192Bug, ENH/TYP\u2192Enhancement, DOC\u2192Docs, PERF\u2192Performance.",
+      "definitions": {
+        "Bug": "Reported incorrect behavior, crash, or error in pandas (BUG issues, build/install failures). Not for feature requests, docs fixes, pure performance reports, or design discussions.",
+        "Enhancement": "Request for new functionality, API change, or typing/stub improvement (ENH, TYP). Not for bug reports, even if the fix sounds like a feature, nor open-ended discussion/proposals about code ownership.",
+        "Docs": "Documentation problems or improvements (DOC issues), including installation/packaging documentation mismatches such as differing dependencies across conda channels.",
+        "Regression": "Only when the issue explicitly shows behavior worked in a specific earlier pandas release and broke in a newer one, or a named PR broke it. Not for vague install failures or long-standing bugs.",
+        "Performance": "Issue primarily about slowness or excessive memory use (PERF, or ENH asking to reduce memory/time). Not for bug reports that merely mention memory.",
+        "Arrow": "Core subject is pyarrow-backed dtypes (ArrowDtype, timestamp[pyarrow], binary/string views) or pandas\u2013pyarrow integration. Not when pyarrow is only an engine/backend incidental to the bug (e.g., parquet engine, groupby with arrow types).",
+        "Strings": "Issues about the string dtype (StringDtype, future default string dtype, Arrow string/binary types) or interpreting string dtype names. Not ordinary .str accessor bugs on object data like regex replace.",
+        "Missing-data": "Only when missing-value semantics are the central design topic (e.g., NA/NaN handling in lookups, isna/dropna/fillna/interpolate behavior, missing values in readers). Not for bugs where NaN/None/NaT just appears in the reproducer.",
+        "Indexing": "Selecting/filtering/setting data via loc, iloc, [], boolean masks, query on Series/DataFrame. Not for Index object methods (union, is_unique, contains).",
+        "Datetime": "Rarely applied: only for core datetime64/Timestamp dtype behavior issues explicitly triaged as such. Not for timezones/pytz, timedelta, NaT stubs, offsets/frequencies, to_excel dates, dt docs, or pyarrow timestamps.",
+        "IO CSV": "Bugs or features specific to read_csv/to_csv behavior. Not for generic requests covering many IO functions (excel, csv, etc.) together.",
+        "Groupby": "Issues about groupby operations (aggregations, value_counts, apply on groups) where groupby logic is the problem, not merely used in the example."
+      }
+    },
+    {
+      "at_issue": 320,
+      "event": "rejected",
+      "holdout_f1_current": 0.8721,
+      "holdout_f1_candidate": 0.8715,
+      "instructions": "Decide which labels pandas maintainers would apply. Title prefix dominates over the template used: BUG\u2192Bug, ENH/TYP\u2192Enhancement, DOC/Doc\u2192Docs, PERF\u2192Performance. 'API:' design discussions about string dtype get Strings (plus Docs if about documenting behavior) but no Enhancement. A BUG report about an unsupported option/feature is Enhancement, not Bug. Add topic labels only when that topic is the core subject; incidental mentions don't count. When unsure about Regression or Datetime, omit.",
+      "definitions": {
+        "Bug": "Incorrect behavior, crash, or error (BUG-prefixed, CI/build failures), even if filed with docs template. Not for DOC-titled issues, 'API:' discussions, requests to support an unsupported option, or ENH-titled issues.",
+        "Enhancement": "New functionality or API change (ENH, TYP), including BUG-titled reports that an option/parameter is simply unsupported. Not for 'API:' string-dtype design discussions or numpy-string conversion requests, which get only Strings.",
+        "Docs": "Documentation problems/improvements: DOC/Doc-titled issues (even with bug template), API discussions concluding behavior should be documented, packaging doc mismatches. Not for BUG-titled issues filed via docs template.",
+        "Regression": "Very rare. Only for core functionality (e.g. setting values under copy-on-write) confirmed broken versus a previous release. Not for private import paths, docs/site issues, CI, display/printing changes, or PERF slowdowns, even if titles say 'broke since version X'.",
+        "Performance": "Primarily slowness or excessive memory use (PERF, including performance regressions versus older versions). Not for bug reports that merely mention memory.",
+        "Arrow": "Pyarrow-backed dtypes or features: ArrowDtype, pyarrow timestamp/list/categorical types, list/struct accessors, read_csv with engine='pyarrow'. Not when pyarrow is only installed or just the default string storage.",
+        "Strings": "String dtype topics: StringDtype, storage defaults (python/pyarrow), future default string dtype, object vs str dtype for columns/values, numpy string conversion. Not ordinary .str accessor bugs on object data.",
+        "Missing-data": "When NaN/None/NaT handling causes or defines the problem: replacing with None upcasting, NaT/NaN in index lookups, isna/fillna/dropna/interpolate semantics. Not when missing values merely appear in the reproducer.",
+        "Indexing": "Selecting/setting via loc, iloc, [], masks; Index/MultiIndex behavior and alignment, including index properties like has_duplicates on subsets. Not query/eval parsing, iteration return types, or dtype casting on assignment.",
+        "Datetime": "DatetimeIndex behavior (resample/alignment, set_index producing DatetimeIndex), new datetime features, to_datetime unit semantics. Not Timestamp scalar constructor/value bugs, non-ns resolutions, string format parsing, timezones, timedelta, offsets.",
+        "IO CSV": "read_csv/to_csv specific bugs, features, or docs (e.g. float_format, quoting options, parsing dates in read_csv). Not generic requests spanning many IO functions.",
+        "Groupby": "Only actual DataFrame/Series.groupby operations where grouping logic is the problem. Not Series.value_counts, DataFrame.agg on non-grouped data, or describe."
+      }
+    },
+    {
+      "at_issue": 480,
+      "event": "accepted",
+      "holdout_f1_current": 0.8187,
+      "holdout_f1_candidate": 0.8342,
+      "instructions": "Decide which labels pandas maintainers would apply. Use the title prefix as the primary type: BUG\u2192Bug, ENH/TYP\u2192Enhancement, DOC\u2192Docs, PERF\u2192Performance. A BUG-titled issue about slowness gets Performance, not Bug. Add topic labels sparingly, only when that topic is the core subject. Incidental mentions of NaN, dates, pyarrow, groupby, loc, or reindex do not justify a topic label. When unsure about a topic label, omit it.",
+      "definitions": {
+        "Bug": "Default for BUG-titled reports of wrong results, errors, crashes, or connection/install failures, even if the cause is unclear. Omit when maintainers would treat it as expected or documented behavior (use Docs), or when it is about slowness or new platform support.",
+        "Enhancement": "ENH/TYP requests for new functionality, better error messages, API changes, or support for new Python versions/builds such as free-threading. Use Enhancement alone for ENH issues. Do not add Performance just because a costly step is mentioned.",
+        "Docs": "DOC issues, website outages, and 'bug' reports that describe expected but surprising behavior (rounding, return types, apply results), which need clarified docs. Not for conda/packaging availability problems.",
+        "Regression": "Only when the issue states it worked in a specific earlier pandas version, or blames a named PR. Merely naming the version currently used, or a long-standing bug, does not count.",
+        "Performance": "Issue primarily reports slowness or excessive memory use (PERF titles, or BUG titles complaining about poor performance). Not for ENH requests that merely propose skipping a costly step.",
+        "Arrow": "Core subject is ArrowDtype/pyarrow-backed dtypes behaving badly, including slowness with ArrowDtype-wrapped types. Not for exotic pyarrow extension types (e.g. json), or datetime comparisons where Datetime applies.",
+        "Strings": "String-related issues: StringDtype, the default string dtype, Arrow string types, and .str accessor methods such as replace with regex/capture groups.",
+        "Missing-data": "Issues where NaN/NA handling is central: skipna parameters (including performance of skipna), NaN values causing failures in alignment or arithmetic. Not for masking or filling with pd.NA in nullable dtypes.",
+        "Indexing": "Index/MultiIndex structure and alignment problems (misaligned MultiIndex in arithmetic, set_index behavior). Not for query, where/mask, reindex, or boolean mask operator issues.",
+        "Datetime": "Datetime parsing and datetime64 comparison issues, e.g. to_datetime input conversion, datetime64 vs pyarrow timestamps. Not for concat/join on DatetimeIndex, dtype changes on assignment, timezones, or timedeltas.",
+        "IO CSV": "Bugs or features specific to read_csv/to_csv behavior. Not for generic IO requests spanning several formats.",
+        "Groupby": "Issues where groupby logic itself is the problem or subject (e.g. groupby ops, skipna in groupby regressions). Not when slowness stems from a dtype like ArrowDtype used inside groupby."
+      }
+    },
+    {
+      "at_issue": 640,
+      "event": "rejected",
+      "holdout_f1_current": 0.8636,
+      "holdout_f1_candidate": 0.8508,
+      "instructions": "Decide which labels pandas maintainers would apply. Title prefix sets the type: BUG\u2192Bug, ENH/TYP\u2192Enhancement, DOC\u2192Docs, PERF\u2192Performance; mixed 'BUG/FEATURE' or how-to questions are not Bug. Slowness/memory reports get Performance; Bug may still be added for memory blowups that are really errors. DOC issues get Docs alone. Add topic labels only when the topic is the core subject; incidental mentions of NaN, dates, pyarrow, MultiIndex, or groupby-like ops (pivot_table) don't count.",
+      "definitions": {
+        "Bug": "BUG-titled reports of wrong results, errors, crashes, or missing expected methods. Omit for how-to/usage questions, combined bug/feature requests (Enhancement), or debatable semantics like fill_value=None meaning.",
+        "Enhancement": "ENH/TYP requests or BUG/FEATURE hybrids asking for new functionality, options, better errors, API changes, or new Python version/build support. Do not add Performance for merely skipping a costly step.",
+        "Docs": "DOC-titled issues, website outages, or reports explicitly about misleading documentation. Not for BUG reports of missing functionality or wrong results, even if docs could be clearer.",
+        "Regression": "Only when the issue explicitly names an earlier pandas version where it worked, or blames a named PR. Phrases like 'no longer works' without a specific working version do not count.",
+        "Performance": "Primarily about slowness (PERF titles, or BUG titles complaining of slow operations). Not for memory errors/blowups tied to a dtype bug, nor ENH requests proposing to skip a step.",
+        "Arrow": "Core subject is pyarrow-backed dtypes (ArrowDtype, ArrowExtensionArray, string[pyarrow], timestamp[pyarrow]) failing in operations, IO or indexes. Not when pyarrow is incidental to a generic numeric op result.",
+        "Strings": "Python/default StringDtype semantics, string-dtype indexes/alignment, and .str accessor methods. Not for string[pyarrow]-specific failures (use Arrow) in parquet, merge, or memory.",
+        "Missing-data": "NaN/NA semantics are the subject: dropna/NaN group keys, skipna, fill_value handling (incl. fill_value=None). Not for NaN-to-None conversions in to_dict, assert_frame_equal with pd.NA, or pivot_table dropna.",
+        "Indexing": "Selecting/setting data: iloc/loc/getitem/setitem behavior, boolean indexers, setting incompatible dtypes, EA element access, selecting columns by name pattern. Not for MultiIndex in concat, pivot, assign, difference, or arithmetic alignment.",
+        "Datetime": "datetime64/DatetimeIndex behavior in core ops: parsing, non-ns units (e.g. ms) producing NaT in concat/MultiIndex, DatetimeIndex plotting slowness. Not for IO readers (read_hdf), Period, timezones, or timedeltas.",
+        "IO CSV": "Bugs or features specific to read_csv/to_csv. Not for other formats or generic multi-format IO requests.",
+        "Groupby": "groupby objects/ops are the subject (groupby apply, .groups, group-wise analysis like inspecting duplicate groups). Not for pivot_table, DOC issues about groupby methods, or dtype-driven slowness inside groupby."
+      }
+    },
+    {
+      "at_issue": 800,
+      "event": "rejected",
+      "holdout_f1_current": 0.7765,
+      "holdout_f1_candidate": 0.75,
+      "instructions": "Decide which labels pandas maintainers would apply. Title prefix sets type: BUG\u2192Bug, ENH/TYP/API\u2192Enhancement, DOC\u2192Docs, PERF\u2192Performance (PERF issues get Performance alone, no topic labels). BUG-titled slowness gets Bug plus Performance. Add topic labels only when the topic is the core subject; incidental mentions of NaN, Index, MultiIndex, pyarrow, strings, or dates don't count. Regression is rare. When unsure about a topic label, omit it.",
+      "definitions": {
+        "Bug": "BUG-titled wrong results, errors, crashes, or slowness. Omit for docs build/doc-mismatch issues (Docs), for string-dtype migration/compatibility issues (Strings alone), and for feature gaps like unsupported operators on new string dtype (Enhancement).",
+        "Enhancement": "ENH/TYP/API requests for new functionality or API changes, including 'BUG' reports that an operation (e.g. Path / Series) was never supported for a new dtype. Better error messages, new Python version/build support.",
+        "Docs": "DOC issues, documentation build errors, website problems, and reports where docs claim behavior that isn't implemented or platform limitations need documenting. Use instead of Bug in those cases.",
+        "Regression": "Only when the reporter explicitly says it worked in an earlier pandas release with the same code and dtype, or blames a named PR. Not pickle/back-compat with old versions, not changes due to new default string dtype.",
+        "Performance": "Slowness or excessive memory/copying is the main complaint: all PERF titles (including internals of read_csv, copy behavior) and BUG titles about slow operations (add Bug too). Not ENH proposals skipping a costly step.",
+        "Arrow": "pyarrow-backed (ArrowDtype/[pyarrow]) arrays behaving wrongly: timestamp[pyarrow], rank/ops on pyarrow backend, pyarrow string replace with NA. Not PERF issues, not new default str dtype compatibility (Strings).",
+        "Strings": "Default/StringDtype ('str') issues: dtype interpretation, pickling, select_dtypes object vs str, object-dtype string data handling, str dtype operator support. Not tests or mask/where merely using string data, nor pyarrow-string replace bugs (Arrow).",
+        "Missing-data": "NaN/NA handling is the central design subject: skipna semantics, fillna/dropna/interpolate, NaN breaking alignment. Not pd.isna questions on nullable Float64 NaN vs NA, nor NaN results incidental to other bugs.",
+        "Indexing": "Selecting/setting values: [], loc, iloc, boolean column/row selection, and results corrupted by indexing state (e.g. repeated rolling after copy). Not Index object methods (union, intersection, unique, drop, constructor), window indexers, or IntervalIndex.",
+        "Datetime": "Datetime/Timestamp values misbehaving: to_datetime parsing, pyarrow timestamp ops (tz_localize, merge, Windows errors), datetime vs Timestamp mismatch in Index/MultiIndex ops. Not DateOffset/DST arithmetic, nor numpy vs pyarrow tz constructor differences (Arrow).",
+        "IO CSV": "BUG/ENH behavior of read_csv/to_csv (parsing, options, output). Not PERF issues about parser internals, nor generic IO across formats.",
+        "Groupby": "groupby logic is the subject: groupby aggregations, transform, rank, apply, wrong code paths in groupby, including groupby ops misbehaving with pyarrow backend. Not slowness caused by a dtype used inside groupby."
+      }
+    },
+    {
+      "at_issue": 960,
+      "event": "rejected",
+      "holdout_f1_current": 0.9054,
+      "holdout_f1_candidate": 0.8701,
+      "instructions": "Decide which labels pandas maintainers would apply. Title prefix sets the type: BUG\u2192Bug, ENH/TYP\u2192Enhancement, DOC\u2192Docs, PERF\u2192Performance. ENH proposals whose goal is speed get Performance only. API/DEPR or unprefixed issues get only topic labels, not Enhancement. Add topic labels only when the topic is the core subject; incidental mentions of NaN/NA, dates, pyarrow, groupby, MultiIndex, or fill values don't count. When unsure about a topic label or Regression, omit it.",
+      "definitions": {
+        "Bug": "Default for BUG-titled reports of wrong results, errors, crashes, or install failures (including new Python builds like free-threading). Omit for slowness, user-error/unclear-usage reports needing doc clarification, or dev-environment/Dockerfile setup problems (Docs).",
+        "Enhancement": "ENH/TYP requests for new functionality, new API options, or changed behavior. Not for BUG-titled install failures, not for API/DEPR deprecation discussions, and not for ENH proposals primarily about speed (use Performance).",
+        "Docs": "DOC issues, website problems, contributor dev-environment/Dockerfile setup, and BUG reports where the failure is user error from an undocumented requirement (e.g. unclear merge_asof errors). Not for features that genuinely don't work as documented.",
+        "Regression": "Only when the issue explicitly calls it a regression or shows the same pandas code working in a named earlier release and failing in a later one. Not for 'stopped working' vague claims, third-party library breakage, or main-branch-only bugs.",
+        "Performance": "Core subject is speed or memory: PERF titles, BUG titles complaining of slowness, and ENH proposals to speed up internals (e.g. numba, faster reductions). Not for requests merely to skip a costly step.",
+        "Arrow": "Failure originates in pyarrow-backed code: ArrowDtype/[pyarrow] dtypes, engine='pyarrow' readers, read_parquet, pyarrow-backed str methods raising inside pyarrow. Not for string-vs-object behavior differences (Strings) or internal helpers with non-arrow dtypes.",
+        "Strings": "String-related issues: StringDtype, default string dtype, StringArray behavior, string arithmetic/comparison differences, and .str accessor methods such as replace with regex groups.",
+        "Missing-data": "NaN/NA semantics are the subject: skipna, casting NaN to bool, NA in comparisons, NaN propagation. Not for errors merely involving pd.NA values, np.nan as a replace value, or fill_value options.",
+        "Indexing": "Selecting or setting values via .loc/.iloc/[]: setitem semantics, iloc assignment, silent indexing failures, multi-slice loc. Not for MultiIndex manipulation like sort_index, unstack, adding levels, or setitem regressions on categorical levels.",
+        "Datetime": "Datetime parsing, datetime64 comparisons, timezone/DST problems (NonExistentTimeError, date_range, resample across DST). Not for Period dtype, ENH datetime arithmetic requests, concat on DatetimeIndex, or timedeltas.",
+        "IO CSV": "Bugs or features specific to read_csv/to_csv behavior, including engine-specific read_csv failures. Not for generic IO requests spanning several formats.",
+        "Groupby": "groupby logic itself is the subject, including groupby.apply deprecation warnings and groupby reductions. Not for resample/asfreq issues or slowness caused by a dtype used inside groupby."
+      }
+    },
+    {
+      "at_issue": 1120,
+      "event": "rejected",
+      "holdout_f1_current": 0.8619,
+      "holdout_f1_candidate": 0.8663,
+      "instructions": "Decide which labels pandas maintainers would apply. Title prefix suggests type: BUG\u2192Bug, ENH/TYP\u2192Enhancement, DOC\u2192Docs, PERF\u2192Performance, REGR\u2192Regression; but follow definitions for exceptions. Topic labels (Indexing, Strings, Arrow, Groupby, Missing-data) are applied when that area is where the defect lives. Datetime is rarely used; never add it merely because timestamps, units, to_datetime or Period appear. When unsure about Datetime or Regression, omit.",
+      "definitions": {
+        "Bug": "BUG-titled wrong results, errors, crashes, install/dependency failures (including 'support numpy X' requests). Often omitted for REGR-titled issues and for limitations of the pyarrow-backed str dtype (unsupported regex, result dtypes); omit when behavior is expected (Docs).",
+        "Enhancement": "ENH/TYP requests for new methods, options or API changes. Not when the request is purely about speed (Performance only), achievable with existing indexing (Docs+Indexing), untitled design discussions about string dtype (Strings), or BUG-titled compatibility asks.",
+        "Docs": "DOC issues, and reports where maintainers judge behavior expected but surprising (e.g. label slicing with step, apply not preserving pyarrow dtypes) or a feature request already doable with existing API. Not for docstring-only topic tags.",
+        "Regression": "REGR titles, titles saying 'regression', or bodies showing the code worked in a prior released version (e.g. pandas 2.x works, 3.0 fails). Merely reproducing on 3.0rc0/main, or new-unit/new-default behavior, is not enough.",
+        "Performance": "Issue is primarily about speed or memory: PERF titles (including PERF/API), BUG reports of slowness, and ENH proposals for faster internals (vectorization, SIMD, hashtables) \u2014 use Performance instead of Enhancement for these.",
+        "Arrow": "Behavior of ArrowDtype/pyarrow-backed data: pyarrow string results (split list ops, unsupported regex, bool[pyarrow] outputs), pyarrow-backed indexes, comparisons failing with pyarrow. Not when groupby/Grouper is the subject, or apply dtype preservation (Docs).",
+        "Strings": "Issues caused by the str/StringDtype (incl. pandas 3.0 default string dtype breaking HDF, column comparisons, where with NA, invalid unicode), and .str methods like isdigit/replace. Not for DOC docstring fixes, list results after split, or NaN-to-NA conversion in pd.array.",
+        "Missing-data": "NaN/NA handling is central: NA values as labels/keys (e.g. drop with NA in index), skipna behavior, NaN causing failures in alignment or arithmetic. Not for simple NaN\u2192NA conversion or fill/mask with pd.NA.",
+        "Indexing": "Getting/setting via loc/iloc/[]/__getitem__, slicing, assigning values to columns/cells, row selection (middle/contiguous rows), copy-on-write/chained assignment, Index/RangeIndex/MultiIndex behavior including pyarrow-backed indexes, and MultiIndex alignment.",
+        "Datetime": "Rarely applied. Not for Timestamp/Period overflow or repr, non-nano unit/resolution issues, to_datetime unit/origin/format errors, datetime index slicing, quantile on datetimes, calendar requests, or pyarrow timestamps. Prefer Bug alone.",
+        "IO CSV": "Bugs or features specific to read_csv/to_csv behavior. Not for other formats (HDF, JSON) or generic IO requests spanning several formats.",
+        "Groupby": "groupby or pd.Grouper is the subject, e.g. groupby ops or Grouper converting dtypes (even pyarrow timestamps). Not when slowness stems purely from a dtype used inside groupby."
+      }
+    },
+    {
+      "at_issue": 1280,
+      "event": "rejected",
+      "holdout_f1_current": 0.8041,
+      "holdout_f1_candidate": 0.7917,
+      "instructions": "Decide which labels pandas maintainers would apply. Title prefix sets type: BUG\u2192Bug, ENH\u2192Enhancement, DOC\u2192Docs, PERF\u2192Performance. DEPR/API/untitled issues get only topic labels, no type label. DOC issues normally get Docs alone. Topic labels only when that topic is the core subject. PERF issues usually also get the topic of the operation (Indexing, Datetime). Incidental NaN, pyarrow, index, or date mentions don't justify topics. When unsure, omit.",
+      "definitions": {
+        "Bug": "BUG-titled reports of wrong results, errors, or crashes. Omit for untitled warning/annoyance reports, expected behavior (Docs), slowness, or when the issue explicitly says 'Regression' in title (use Regression alone).",
+        "Enhancement": "ENH/TYP issues and untitled feature suggestions (including requests to add links/content to docs). Not for DEPR or API discussion issues, nor benchmark/CI performance-monitoring requests (Performance).",
+        "Docs": "DOC-titled issues, website problems, and BUG reports where the behavior is intended (e.g. removed/unsupported usage) and docs need clarifying. Not for suggestions to add external links (Enhancement).",
+        "Regression": "Issue explicitly says 'regression', names an earlier pandas version where it worked, or blames a specific recent change (including docs breakage). 'No longer works' phrasing or merely stating current version is NOT enough.",
+        "Performance": "Slowness: PERF titles, BUG titles about speed, and benchmark/ASV coverage requests. Not for memory blowups caused by a dtype bug (use that topic), nor ENH requests skipping a costly step.",
+        "Arrow": "pyarrow-backed behavior is core: ArrowDtype, pyarrow storage, results differing by pyarrow vs python storage, convert_dtypes storage, pyarrow-version-specific bugs, Arrow memory issues. Not for pyarrow extension types like ArrowIntervalType.",
+        "Strings": "str/StringDtype default string dtype behaving wrongly: NaN representation in str columns, str columns in IO or reductions, .str methods. Not for ArrowDtype(pa.string()) (Arrow), storage repr, or return-type complaints like case_when.",
+        "Missing-data": "Only when missing-data methods are the subject: interpolate, fillna, dropna, isna. Not for skipna parameters, NaN keys in merges, NaN in construction, or NaN types in Series.",
+        "Indexing": "Getting/setting via __getitem__, loc, iloc, setitem (including performance of these), MultiIndex alignment, set_index. Not for unstack, concat index freq, sort_index, reindex, or query.",
+        "Datetime": "Datetime core: to_datetime parsing/warnings, datetime64 comparisons, datetimelike indexers, DatetimeIndex accessors and timezone (ZoneInfo/pytz) performance. Not for platform test failures, HDF datetime indexes, concat freq.",
+        "IO CSV": "Bugs, features, or deprecations specific to read_csv/to_csv parameters or parsing. Not for DOC issues about read_csv parameters (Docs only) or generic multi-format IO.",
+        "Groupby": "Issues where groupby logic itself is the problem or subject (groupby ops, aggregations, skipna in groupby). Not when slowness stems from a dtype like ArrowDtype used inside groupby."
+      }
+    }
+  ]
+}

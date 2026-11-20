@@ -1,0 +1,71 @@
+{
+  "bot": "A. Rules",
+  "repo": "pandas-dev/pandas",
+  "seconds": 0.5,
+  "Bug": [
+    "\\bbug\\b",
+    "\\berror\\b",
+    "exception",
+    "traceback",
+    "\\bcrash",
+    "doesn'?t work",
+    "\\bbroken\\b",
+    "\\bfails?\\b",
+    "unexpected",
+    "incorrect",
+    "wrong"
+  ],
+  "Enhancement": [
+    "feature request",
+    "\\bfeature\\b",
+    "would be nice",
+    "\\bsupport for\\b",
+    "\\badd (a|an|support)\\b",
+    "\\ballow\\b",
+    "\\bproposal\\b",
+    "\\benhancement\\b"
+  ],
+  "Docs": [
+    "\\bdocs?\\b",
+    "documentation",
+    "readme",
+    "\\btypo\\b",
+    "docstring example"
+  ],
+  "Regression": [
+    "regression",
+    "used to work",
+    "worked in",
+    "since (version|v)?\\s?\\d"
+  ],
+  "Performance": [
+    "\\bslow\\b",
+    "performance",
+    "\\bspeed\\b",
+    "memory usage",
+    "takes too long"
+  ],
+  "Arrow": [
+    "\\barrow"
+  ],
+  "Strings": [
+    "\\bstring"
+  ],
+  "Missing-data": [
+    "\\bmissing",
+    "\\bdata"
+  ],
+  "Indexing": [
+    "\\bindexing"
+  ],
+  "Datetime": [
+    "\\bdatetime"
+  ],
+  "IO CSV": [
+    "\\bio",
+    "\\bcsv"
+  ],
+  "Groupby": [
+    "\\bgroupby"
+  ]
+}

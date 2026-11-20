@@ -1,0 +1,81 @@
+{
+  "bot": "A. Rules",
+  "repo": "pypa/pip",
+  "seconds": 0.5,
+  "type: bug": [
+    "\\bbug\\b",
+    "\\berror\\b",
+    "exception",
+    "traceback",
+    "\\bcrash",
+    "doesn'?t work",
+    "\\bbroken\\b",
+    "\\bfails?\\b",
+    "unexpected",
+    "incorrect",
+    "wrong"
+  ],
+  "type: feature request": [
+    "feature request",
+    "\\bfeature\\b",
+    "would be nice",
+    "\\bsupport for\\b",
+    "\\badd (a|an|support)\\b",
+    "\\ballow\\b",
+    "\\bproposal\\b",
+    "\\benhancement\\b"
+  ],
+  "type: support": [
+    "^how (do|can|to|should)\\b",
+    "\\bquestion\\b",
+    "\\bis it possible\\b",
+    "\\bhelp\\b"
+  ],
+  "type: maintenance": [
+    "\\bci\\b",
+    "github actions",
+    "\\btests?\\b",
+    "\\bbump\\b",
+    "\\brefactor"
+  ],
+  "type: docs": [
+    "\\bdocs?\\b",
+    "documentation",
+    "readme",
+    "\\btypo\\b",
+    "docstring example"
+  ],
+  "type: enhancement": [
+    "feature request",
+    "\\bfeature\\b",
+    "would be nice",
+    "\\bsupport for\\b",
+    "\\badd (a|an|support)\\b",
+    "\\ballow\\b",
+    "\\bproposal\\b",
+    "\\benhancement\\b"
+  ],
+  "type: deprecation": [
+    "deprecat"
+  ],
+  "type: performance": [
+    "\\bslow\\b",
+    "performance",
+    "\\bspeed\\b",
+    "memory usage",
+    "takes too long"
+  ],
+  "C: error messages": [],
+  "C: dependency resolution": [
+    "\\bdependency",
+    "\\bresolution"
+  ],
+  "C: network connectivity": [
+    "\\bnetwork",
+    "\\bconnectivity"
+  ],
+  "project: vendored dependency": [
+    "\\bvendored",
+    "\\bdependency"
+  ]
+}

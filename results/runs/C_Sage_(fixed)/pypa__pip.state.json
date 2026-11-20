@@ -1,0 +1,20 @@
+{
+  "bot": "C. Sage (fixed)",
+  "repo": "pypa/pip",
+  "seconds": 1269.8,
+  "instructions": "This is a new GitHub issue filed in the pypa/pip repository. Decide which labels the maintainers would apply to it. A label applies only when the issue is clearly about that topic.",
+  "definitions": {
+    "type: bug": "A confirmed bug or unintended behavior",
+    "type: feature request": "Request for a new feature",
+    "type: support": "User Support",
+    "type: maintenance": "Related to Development and Maintenance Processes",
+    "type: docs": "Documentation related",
+    "type: enhancement": "Improvements to functionality",
+    "type: deprecation": "Related to deprecation / removal.",
+    "type: performance": "Commands take too long to run",
+    "C: error messages": "Improving error messages",
+    "C: dependency resolution": "About choosing which dependencies to install",
+    "C: network connectivity": "",
+    "project: vendored dependency": "Related to a vendored dependency"
+  }
+}

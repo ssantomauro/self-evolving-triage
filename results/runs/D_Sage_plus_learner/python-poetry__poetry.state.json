@@ -1,0 +1,244 @@
+{
+  "bot": "D. Sage + learner",
+  "repo": "python-poetry/poetry",
+  "seconds": 2907.1,
+  "instructions": "Decide which labels maintainers would apply to this new python-poetry/poetry issue. Maintainers mainly assign ONE kind label, usually matching the issue template: bug-report template (Poetry/Python/OS version fields) \u2192 kind/bug; feature-request template \u2192 kind/feature. Area labels are applied very rarely at triage; default to NO area label even when the topic seems related (solver, venv, cli, deps, sources, etc.). Documentation-gap issues get area/docs alone, without a kind label.",
+  "definitions": {
+    "kind/bug": "Default for issues using the bug-report template (version/OS fields) or reporting errors, crashes, hangs, wrong behavior\u2014even if phrased as a request or question. Not for docs-only issues.",
+    "kind/feature": "Requests for new functionality, options, commands, or behavior changes, typically using the feature-request template. Not combined with kind/bug.",
+    "kind/question": "Rare. Only when the reporter's problem is clearly user misconfiguration or expected behavior (e.g., source priority setup, platform wheel availability) rather than a Poetry defect. Do not use for bug-template reports of failures.",
+    "area/docs": "Issue is that behavior is undocumented, unclear, or the docs are wrong/missing; the fix is a documentation change. Usually applied alone without a kind label.",
+    "area/installer": "Almost never applied at triage. Only if the issue is explicitly about internals of the package installer/executor code itself; do not apply for general install failures.",
+    "area/solver": "Rarely applied. Only for clear lock/hash consistency problems traced to resolver internals. Do NOT apply for slow/infinite resolution, resolution failures, or version-solving errors\u2014those get only kind/bug.",
+    "area/core": "Almost never applied at triage. Do not apply for build, metadata, scripts, or pyproject issues; those get only a kind label.",
+    "area/cli": "Almost never applied at triage. Do not apply merely because a command (run, shell, show, self, add, build) is involved or a new flag is requested.",
+    "area/deps": "Almost never applied at triage. Do not apply for dependency specs, extras, groups, version constraints, or lock issues; use only a kind label.",
+    "area/venv": "Almost never applied at triage. Do not apply for interpreter detection, shell activation, virtualenv creation errors, or install-of-Poetry problems.",
+    "area/sources": "Almost never applied at triage. Do not apply for private repositories, URL dependencies, source priority, or index/publish URL requests.",
+    "area/vcs": "Almost never applied at triage. Do not apply for git dependency failures (rev, branch, commit); those get only kind/bug."
+  },
+  "cutoffs": {
+    "kind/bug": 0.5,
+    "kind/feature": 0.9,
+    "area/docs": 0.7,
+    "area/solver": 0.1,
+    "area/deps": 0.9,
+    "kind/question": 0.9,
+    "area/venv": 0.65,
+    "area/installer": 0.9,
+    "area/vcs": 0.1,
+    "area/core": 0.8,
+    "area/cli": 0.9,
+    "area/sources": 0.1
+  },
+  "spec_log": [
+    {
+      "at_issue": 0,
+      "event": "initial",
+      "instructions": "This is a new GitHub issue filed in the python-poetry/poetry repository. Decide which labels the maintainers would apply to it. A label applies only when the issue is clearly about that topic.",
+      "definitions": {
+        "kind/bug": "Something isn't working as expected",
+        "kind/feature": "Feature requests/implementations",
+        "kind/question": "User questions (candidates for conversion to discussion)",
+        "area/docs": "Documentation issues/improvements",
+        "area/installer": "Related to the dependency installer",
+        "area/solver": "Related to the dependency resolver",
+        "area/core": "Related to the poetry-core library",
+        "area/cli": "Related to the command line",
+        "area/deps": "Related to representing and locking dependencies",
+        "area/venv": "Related to virtualenv management",
+        "area/sources": "Releated to package sources/indexes/repositories",
+        "area/vcs": "Related to support for VCS dependencies (Git and Dulwich)"
+      }
+    },
+    {
+      "at_issue": 160,
+      "event": "accepted",
+      "holdout_f1_current": 0.6439,
+      "holdout_f1_candidate": 0.9219,
+      "instructions": "Decide which labels maintainers would apply to this new python-poetry/poetry issue. Maintainers mainly assign ONE kind label, usually matching the issue template: bug-report template (Poetry/Python/OS version fields) \u2192 kind/bug; feature-request template \u2192 kind/feature. Area labels are applied very rarely at triage; default to NO area label even when the topic seems related (solver, venv, cli, deps, sources, etc.). Documentation-gap issues get area/docs alone, without a kind label.",
+      "definitions": {
+        "kind/bug": "Default for issues using the bug-report template (version/OS fields) or reporting errors, crashes, hangs, wrong behavior\u2014even if phrased as a request or question. Not for docs-only issues.",
+        "kind/feature": "Requests for new functionality, options, commands, or behavior changes, typically using the feature-request template. Not combined with kind/bug.",
+        "kind/question": "Rare. Only when the reporter's problem is clearly user misconfiguration or expected behavior (e.g., source priority setup, platform wheel availability) rather than a Poetry defect. Do not use for bug-template reports of failures.",
+        "area/docs": "Issue is that behavior is undocumented, unclear, or the docs are wrong/missing; the fix is a documentation change. Usually applied alone without a kind label.",
+        "area/installer": "Almost never applied at triage. Only if the issue is explicitly about internals of the package installer/executor code itself; do not apply for general install failures.",
+        "area/solver": "Rarely applied. Only for clear lock/hash consistency problems traced to resolver internals. Do NOT apply for slow/infinite resolution, resolution failures, or version-solving errors\u2014those get only kind/bug.",
+        "area/core": "Almost never applied at triage. Do not apply for build, metadata, scripts, or pyproject issues; those get only a kind label.",
+        "area/cli": "Almost never applied at triage. Do not apply merely because a command (run, shell, show, self, add, build) is involved or a new flag is requested.",
+        "area/deps": "Almost never applied at triage. Do not apply for dependency specs, extras, groups, version constraints, or lock issues; use only a kind label.",
+        "area/venv": "Almost never applied at triage. Do not apply for interpreter detection, shell activation, virtualenv creation errors, or install-of-Poetry problems.",
+        "area/sources": "Almost never applied at triage. Do not apply for private repositories, URL dependencies, source priority, or index/publish URL requests.",
+        "area/vcs": "Almost never applied at triage. Do not apply for git dependency failures (rev, branch, commit); those get only kind/bug."
+      }
+    },
+    {
+      "at_issue": 320,
+      "event": "rejected",
+      "holdout_f1_current": 0.8254,
+      "holdout_f1_candidate": 0.6369,
+      "instructions": "Decide which labels python-poetry maintainers would apply. Pick exactly ONE kind label at most (never both bug and feature): bug template \u2192 kind/bug unless clearly user setup/environment issue (kind/question). Add an area label when the issue is squarely about that subsystem (venv behavior, solver/resolution, poetry-core internals, lock consistency); skip area labels for generic or tangential mentions. 'How do I\u2026' issues where docs are missing get area/docs alone, no kind label.",
+      "definitions": {
+        "kind/bug": "Errors, crashes, wrong behavior, cryptic messages, or bug-template reports of Poetry defects. Also requests to bump Poetry's own vulnerable/outdated dependencies. Not docs-only issues; not when cause is user's network/config.",
+        "kind/feature": "Requests for new functionality, options, or commands, typically via feature-request template. Never combined with kind/bug; not for dependency bumps or failure reports.",
+        "kind/question": "Reporter's problem stems from their own environment, network, or configuration (e.g., private repo only reachable locally, source priority, wheel availability), even if bug template used. Applied alone. Not for 'how to' docs gaps.",
+        "area/docs": "Behavior or syntax is undocumented, unclear, or docs are wrong; includes 'how do I specify X, couldn't find it in docs' questions. Applied alone without a kind label.",
+        "area/installer": "Rare. Only when explicitly about the installer/executor internals (parallel install, wheel installation logic); not general install failures.",
+        "area/solver": "Dependency resolution problems: version-solving errors and messages, unable to find installation candidates, pre-release/constraint preferences ignored during lock/update, resolver hash/lock inconsistencies. Add with kind/bug.",
+        "area/core": "Issues in poetry-core internals (e.g., its vendoring, sys.path handling, core package code). Not for ordinary build, metadata, scripts, or pyproject usage issues.",
+        "area/cli": "Rare. Only for problems with the command-line interface itself (argument parsing, output formatting); not merely because a command is involved or a flag requested.",
+        "area/deps": "Problems with dependency handling consistency: lock --check missing mismatches, local/transitive dependency versions, vendored dependency conflicts. Not for routine extras/groups/constraint usage questions.",
+        "area/venv": "Bugs in Poetry's virtualenv management: prefer-active-python, wrong interpreter/venv selected, created venv broken (pip hidden, errors in venv). Not for installing Poetry itself.",
+        "area/sources": "Rare. Only for defects in package source/repository handling code (index config, credentials logic); not user setup of private repos.",
+        "area/vcs": "Rare. Only for defects in git/VCS dependency handling internals; ordinary git dependency failures get only kind/bug."
+      }
+    },
+    {
+      "at_issue": 480,
+      "event": "rejected",
+      "holdout_f1_current": 0.8593,
+      "holdout_f1_candidate": 0.7104,
+      "instructions": "Decide which labels maintainers would apply to this new python-poetry/poetry issue. Assign exactly ONE kind label: any issue using the bug-report template (Poetry/Python/OS version fields) gets kind/bug, even if phrased as a request; kind/feature only for feature-template or explicit enhancement requests without bug fields. Area labels are optional; add one only when the topic clearly matches its definition. Documentation-gap issues get area/docs alone.",
+      "definitions": {
+        "kind/bug": "Default for bug-report-template issues (version/OS fields) and reports of errors, crashes, hangs, failed installs or wrong behavior\u2014even when phrased as 'is there a way' or 'does X support'. Not for docs-only issues.",
+        "kind/feature": "Only for feature-request template or explicit enhancement proposals (often titled 'feat:'/'add option') with no bug-template version fields. Never combined with kind/bug; bug-template reports asking for workarounds stay kind/bug.",
+        "kind/question": "Reporter asks why something 'doesn't work' and it's user misconfiguration or expected behavior: source priority/supplemental setup, group option misuse, resolution failure explained by package metadata/Python constraints. Replaces kind/bug.",
+        "area/docs": "Problem is confusing, wrong, or missing documentation or user-facing messages (e.g., installer output text); fix is a docs/wording change. Applied alone without a kind label.",
+        "area/installer": "Failures inside Poetry's package installation/executor step, e.g., install --sync removing/locating paths, broken installs of already-resolved packages in specific environments. Not for resolution or venv creation errors.",
+        "area/solver": "Dependency resolution problems: never-ending/slow resolving, IncompatibleConstraintsError, resolver assertion errors in lock/update, wrong solutions. Add alongside kind/bug when it's a genuine resolver defect.",
+        "area/core": "Build backend/packaging behavior: what files are included in sdists/wheels, build output contents, project metadata generation. Add with kind label when the request/bug concerns built artifacts.",
+        "area/cli": "Rarely applied. Only when the issue is about command-line interface design itself (argument parsing, output formatting). Not merely because a command is involved.",
+        "area/deps": "Rarely applied. Issues about how dependencies are detected/treated in the environment, e.g., system site-packages not recognized as satisfying dependencies. Not for routine constraint or extras resolution.",
+        "area/venv": "Virtualenv creation, detection, or configuration problems: cryptic errors creating venvs, system-site-packages handling, wrong environment used. Add with kind/bug.",
+        "area/sources": "Package sources/repositories: installing from private or custom repositories, packages from secondary indexes no longer installed, extras/requirements resolved from non-PyPI sources. Not when it's simply user source-priority misconfiguration (kind/question).",
+        "area/vcs": "Rarely applied. Only for clear defects in Poetry's git handling internals (cloning, rev resolution); general git dependency failures get only kind/bug."
+      }
+    },
+    {
+      "at_issue": 640,
+      "event": "rejected",
+      "holdout_f1_current": 0.8682,
+      "holdout_f1_candidate": 0.7891,
+      "instructions": "Decide which labels maintainers would apply to this new python-poetry/poetry issue. Usually ONE kind label: the bug-report template (version/OS fields) \u2192 kind/bug, even if phrased as a request; the feature-request template \u2192 kind/feature. Free-form how-to/usage questions or confusion without a template \u2192 area/docs alone, not kind/question. Add an area label only when the issue clearly centers on that subsystem (git deps \u2192 vcs, pathological solving \u2192 solver, installing path/URL deps \u2192 installer).",
+      "definitions": {
+        "kind/bug": "Default for bug-report-template issues (version/OS fields) describing errors, crashes, hangs, or wrong behavior\u2014even if phrased as a request or missing option. Not for free-form how-to questions without the template.",
+        "kind/feature": "Requests for new functionality, options, commands, renames, or behavior changes, typically via feature-request template; includes proposals to change config/file naming even if docs mention it. Not combined with kind/bug.",
+        "kind/question": "Template-filed report where behavior is actually expected/by design or user error (e.g., platform-differing hashes, packages 'from' misuse, plugin warnings, option already exists). Not for free-form how-to questions (those get area/docs).",
+        "area/docs": "Free-form how-to/usage questions, confusion about how something works, or undocumented/wrong docs, typically without the bug template. Applied alone, without a kind label. Not for requests to change behavior/naming (kind/feature).",
+        "area/installer": "Add with kind/bug when installing a specific dependency type fails during `poetry install` (local path, URL, transitive path/git deps). Not for general environment or Poetry-installation problems.",
+        "area/solver": "Add with kind/bug for pathological/extremely slow version solving or resolver-internal problems with specific package combinations. Not for ordinary 'no compatible version' errors caused by constraints.",
+        "area/core": "Almost never applied at triage. Do not apply for build, metadata, scripts, or pyproject issues; those get only a kind label.",
+        "area/cli": "Add with kind/bug when command-line interaction itself misbehaves (interactive prompts, input validation, output formatting). Not merely because a command is involved or a new flag is requested.",
+        "area/deps": "Almost never applied at triage. Do not apply for dependency specs, extras, groups, version constraints, or lock issues; use only a kind label.",
+        "area/venv": "Almost never applied at triage. Do not apply for interpreter detection, shell activation, virtualenv creation errors, or install-of-Poetry problems.",
+        "area/sources": "Almost never applied at triage. Do not apply for private repositories, URL dependencies, source priority, or index/publish URL questions.",
+        "area/vcs": "Add with kind/bug for failures involving git dependencies: cloning, refs/PR refs, rev/branch/commit, system git client, or path deps inside git repos."
+      }
+    },
+    {
+      "at_issue": 800,
+      "event": "rejected",
+      "holdout_f1_current": 0.8209,
+      "holdout_f1_candidate": 0.5981,
+      "instructions": "Decide which labels maintainers would apply to this new python-poetry/poetry issue. Assign exactly ONE kind label (bug, feature, or question); docs-gap issues may get area/docs alone. Bug-report template issues default to kind/bug. Add area labels when the issue's root cause clearly sits in that subsystem (installer, sources, venv, vcs, deps, solver, cli, core); multiple areas are fine. Skip areas for vague or generic failures.",
+      "definitions": {
+        "kind/bug": "Default for errors, crashes, hangs, wrong results, or unexpected behavior, including bug-template reports and complaints about repo tooling/templates behaving badly. Not for expected-behavior changes or usage confusion.",
+        "kind/feature": "Requests for new functionality, options, or behavior changes, including test-suite/packaging improvements (e.g., marking network tests) and 'how can Poetry support X' asks for unsupported workflows. Never combined with kind/bug.",
+        "kind/question": "Reporter's problem is intended behavior (e.g., documented version changes), misconfiguration/misuse (markers, source priority, wheel availability), or a meta/process complaint about the project (bot comments). Use instead of kind/bug then.",
+        "area/docs": "Behavior is undocumented, unclear, or docs are wrong; fix is a documentation change. Usually applied alone without a kind label.",
+        "area/installer": "Problems during installing packages into the env: executor, wheel installer, artifact cache, downloads in install, install --sync removal, direct_url.json, namespace file overwrites, extras/path deps failing at install.",
+        "area/solver": "Dependency resolution/locking internals: resolver logic, package metadata fetching and hashing (PEP 658), lock consistency. Not for generic slow resolution reports without a specific mechanism.",
+        "area/core": "poetry-core concerns: PEP 610/direct_url and URL formatting, package/dependency models, pyproject parsing, build backend. Often paired with another area.",
+        "area/cli": "A specific command's handling is wrong (e.g., poetry add failing under a particular config like package-mode=false, argument parsing, output). Not just because a command is mentioned.",
+        "area/deps": "Dependency specification semantics: markers (platform_machine), extras, path/url/editable dependencies, groups, sync of removed dependencies.",
+        "area/venv": "Virtualenv management and env commands: env info/use/remove, interpreter detection, venv paths and creation.",
+        "area/sources": "Package sources/repositories: private indexes (Artifactory, http-basic auth, 401s), credentials/keyring, source priority, legacy repository handling.",
+        "area/vcs": "Git/VCS dependencies: cloning, rev/branch/commit handling, caching of git-sourced artifacts across commits."
+      }
+    },
+    {
+      "at_issue": 960,
+      "event": "rejected",
+      "holdout_f1_current": 0.9206,
+      "holdout_f1_candidate": 0.601,
+      "instructions": "Assign exactly one kind label: bug-report template (version/OS fields, error reports) \u2192 kind/bug; feature-request template or 'Change in current behaviour' issue kind \u2192 kind/feature. Then add area labels for the subsystem where the failure clearly lies; multiple areas may apply (e.g., solver+sources+vcs). Skip area labels for vague or generic issues. Documentation-gap issues get area/docs alone.",
+      "definitions": {
+        "kind/bug": "Bug-report-template issues or reports of errors, crashes, wrong behavior, even if phrased as a request (e.g., relying on deprecated option). Not for feature-template issues requesting behavior changes, nor docs-only issues.",
+        "kind/feature": "Feature-request template or 'change in current behaviour' requests for new functionality/options. Never combined with kind/bug; a bug-template report proposing a fix stays kind/bug.",
+        "kind/question": "Rare. Only when the problem is clearly user misconfiguration or expected behavior rather than a Poetry defect. Not for bug-template failure reports.",
+        "area/docs": "Behavior is undocumented, unclear, or docs are wrong/missing; fix is a documentation change. Usually applied alone without a kind label.",
+        "area/installer": "Problems installing packages into the environment: path/editable dependencies not (re)installed correctly, install candidates not found during install, installation step failures.",
+        "area/solver": "Dependency resolution/locking producing wrong results: lock missing sources for conditional packages, git revs failing to lock, sources not propagated during resolution. Not for plain slowness alone.",
+        "area/core": "Errors from poetry-core logic: marker/constraint parsing or comparison (e.g., 'Unimplemented comparison'), version/marker handling. Not for generic build or scripts issues.",
+        "area/cli": "Rare. Only when the issue is about command-line interface behavior itself (argument parsing, output formatting), not merely because a command is involved.",
+        "area/deps": "Dependency declaration semantics: groups, dev vs main dependencies shadowing/overriding each other, extras interplay between dependency specifications.",
+        "area/venv": "Virtualenv management: env selection, env use/env.toml, interpreter discovery picking wrong Python, env creation/tracking bugs.",
+        "area/sources": "Package sources/repositories: explicit/supplemental sources, source priority, 'invalid source' errors, private indexes, PyPI repository data (e.g., yanked releases), source not respected for packages.",
+        "area/vcs": "Git/VCS dependencies: cloning, rev/branch/commit handling, shallow clones, git dependency install errors (including platform-specific)."
+      }
+    },
+    {
+      "at_issue": 1120,
+      "event": "rejected",
+      "holdout_f1_current": 0.9091,
+      "holdout_f1_candidate": 0.869,
+      "instructions": "Decide which labels maintainers would apply to this new python-poetry/poetry issue. Usually ONE kind label: feature-request template (\"Issue Kind\" field: new feature, change in behaviour, other) \u2192 kind/feature, even if it describes a problem; bug-report template \u2192 kind/bug. Docs-gap issues get area/docs alone. Area labels are rare except: area/solver for dependency-resolution defects (hangs, loops, wrong resolution) and area/core for build/packaging (sdist/wheel, include/exclude, build output). Otherwise no area label.",
+      "definitions": {
+        "kind/bug": "Bug-report template issues (version/OS fields) reporting errors, crashes, hangs, wrong behavior. Not for feature-template issues (Issue Kind field), even if they describe a problem; not for docs-only or expected-behavior issues.",
+        "kind/feature": "Feature-request template issues (Issue Kind: new feature, change in current behaviour, other): new options, commands, behavior changes, better logging/messages, documented workarounds. Not combined with kind/bug.",
+        "kind/question": "Rare. Reporter's problem is misuse, misconfiguration, or misunderstanding of expected behavior (e.g., marker semantics, source priority, wheel availability) rather than a Poetry defect, even if filed as a bug.",
+        "area/docs": "Behavior is actually intended/documented but surprising, or docs advice should change (e.g., recommended tooling, interpreter selection behavior); the fix is documentation. Applied alone without a kind label.",
+        "area/installer": "Almost never applied at triage. Only for issues explicitly about the installer/executor internals; not for general install failures.",
+        "area/solver": "Dependency resolver defects: infinite loops or hangs during locking/resolving, ignored or wrong transitive requirements, incorrect resolution results. Add alongside kind/bug. Not for simple user constraint conflicts.",
+        "area/core": "Build/packaging behavior handled by poetry-core: sdist/wheel contents, include/exclude/packages defaults, build command output, metadata generation. Add alongside the kind label.",
+        "area/cli": "Almost never applied at triage. Do not apply merely because a command (run, shell, show, self, add, build) is involved or a new flag is requested.",
+        "area/deps": "Almost never applied at triage. Do not apply for dependency specs, extras, groups, version constraints, or lock issues; use only a kind label.",
+        "area/venv": "Almost never applied at triage. Do not apply for interpreter detection, shell activation, virtualenv creation errors, or install-of-Poetry problems.",
+        "area/sources": "Almost never applied at triage. Do not apply for private repositories, URL dependencies, source priority, or index/publish URL requests.",
+        "area/vcs": "Almost never applied at triage. Do not apply for git dependency failures (rev, branch, commit); those get only kind/bug."
+      }
+    },
+    {
+      "at_issue": 1280,
+      "event": "rejected",
+      "holdout_f1_current": 0.8992,
+      "holdout_f1_candidate": 0.593,
+      "instructions": "Decide which labels maintainers would apply to this new python-poetry/poetry issue. Assign one kind label: bug-report template or broken behavior \u2192 kind/bug; feature-request template \u2192 kind/feature; environment/third-party problems not caused by Poetry \u2192 kind/question. Also add an area label when the issue clearly centers on that subsystem (solver, core, venv, vcs, deps, cli). Usually one area; two when clearly overlapping (e.g., slow resolution \u2192 solver+core). Skip area labels for vague or generic install failures. Docs gaps \u2192 area/docs alone.",
+      "definitions": {
+        "kind/bug": "Errors, crashes, hangs, regressions, or wrong behavior in Poetry, typically via bug-report template. Not when the failure stems from the user's system, native libraries, or third-party packages (kind/question). Not for docs-only issues.",
+        "kind/feature": "Requests for new functionality, options, commands, or changes to current behavior, typically using the feature-request template ('Brand new capability' / 'Change in current behaviour'). Not combined with kind/bug.",
+        "kind/question": "Problem is user misconfiguration, expected behavior, or an external/environment issue (system libraries like GLIBCXX, missing platform wheels, package-specific build problems) rather than a Poetry defect, even if filed with the bug template.",
+        "area/docs": "Behavior is undocumented, unclear, or the docs are wrong/missing; the fix is a documentation change. Usually applied alone without a kind label.",
+        "area/installer": "Issue is specifically about the installer/executor (parallel installs, wheel installation, package removal/sync mechanics). Not for generic dependency install failures caused by resolution or packages.",
+        "area/solver": "Dependency resolution: wrong/incomplete lock results, incorrect markers/groups/extras in the lock from resolution, resolution choosing wrong versions, very slow or never-ending locking/adding.",
+        "area/core": "poetry-core concerns: pyproject parsing/validation, version and constraint parsing (PEP 440, python restrictions, markers), metadata, building. Also co-applied with solver for performance regressions in add/lock.",
+        "area/cli": "Behavior or UX of a specific command's own logic (e.g., init/new output, command prompts, flags behavior) where the fix is in the command implementation, not underlying solver/env code.",
+        "area/deps": "Managing dependency declarations: adding/removing deps, extras, importing requirements files, how `poetry add` writes specs/markers into pyproject or lock.",
+        "area/venv": "Virtualenv management: env creation/selection, `poetry env use`, interpreter detection/choice, virtualenvs.create/use-poetry-python settings, Python version compatibility checks against the environment.",
+        "area/sources": "Package sources/repositories: private indexes, source priority, credentials for repositories, index URL handling, publishing targets.",
+        "area/vcs": "Git/VCS dependencies: cloning, dulwich errors, git config (insteadOf, credentials), rev/branch/tag resolution for git deps."
+      }
+    },
+    {
+      "at_issue": 1440,
+      "event": "rejected",
+      "holdout_f1_current": 0.8613,
+      "holdout_f1_candidate": 0.703,
+      "instructions": "Decide which labels python-poetry/poetry maintainers would apply. Assign exactly ONE kind label (bug, feature, or question), except docs-template issues, which get area/docs alone. Bug-report template \u2192 kind/bug unless clearly user misconfiguration/expected behavior (kind/question). Template 'Issue Kind: Change in current behaviour' or new-functionality requests \u2192 kind/feature. Add ONE area label when the issue clearly centers on a specific subsystem (a command's behavior, version solving, pyproject/lock core, venv activation); otherwise none.",
+      "definitions": {
+        "kind/bug": "Bug-report template issues reporting errors, crashes, regressions, wrong output or behavior. Use when unsure between bug and feature. Not for docs-template issues, 'Change in current behaviour' requests, or clear user misconfiguration.",
+        "kind/feature": "Requests for new functionality, commands, options, or changed behavior/messages, including the 'Change in current behaviour' issue kind. Never combined with kind/bug; ambiguous 'bug or feature?' issues get kind/bug.",
+        "kind/question": "Reporter's problem is misuse, misconfiguration, or expected behavior: scripts setup, path/develop deps mixed with project.dependencies, activated env overriding options, custom env naming wishes. Replaces kind/bug; not combined with it.",
+        "area/docs": "Documentation-template issues (unclear/missing docs) get this alone. Also added alongside kind/bug when the behavior is confusing and better docs would resolve it (e.g., include/exclude vs VCS ignore, transitive dependency error explanations).",
+        "area/installer": "Rare. Issues about the package installer/executor internals (parallel install, wheel installation, executor errors), not general dependency resolution or Poetry's own installation.",
+        "area/solver": "Dependency resolution problems: 'version solving failed' errors, resolver regressions between Poetry versions, OverrideNeededError/AssertionError during locking, conflicting extras/groups during resolution, slow or wrong resolution.",
+        "area/core": "pyproject/lock core logic: invalid lock file markers, pyproject schema validation (poetry check), dependency groups and project.dependencies handling, PEP 621 metadata interpretation.",
+        "area/cli": "Behavior or output of a specific command is wrong or needs changing: env activate output, update argument validation, show --outdated, new, self subcommands, new command/flag requests about command UX.",
+        "area/deps": "Rare. Dependency specification semantics (constraints, extras syntax) when not about solving failures or core group handling.",
+        "area/venv": "Virtual environment management: activation scripts/activators missing, env detection, env creation or interpreter selection for the project venv.",
+        "area/sources": "Rare. Package source/repository configuration behavior (priority, private index auth, publish URLs) as the core subject, not just mentioned.",
+        "area/vcs": "Rare. Git/VCS dependency handling (cloning, rev/branch/tag resolution) as the core subject."
+      }
+    }
+  ]
+}

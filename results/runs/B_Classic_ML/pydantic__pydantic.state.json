@@ -1,0 +1,19 @@
+{
+  "bot": "B. Classic ML",
+  "repo": "pydantic/pydantic",
+  "seconds": 12.4,
+  "trained_labels": [
+    "bug V1",
+    "bug V2",
+    "documentation",
+    "feature request",
+    "question",
+    "topic-annotations",
+    "topic-generics",
+    "topic-json schema",
+    "topic-mypy plugin",
+    "topic-performance",
+    "topic-serialization"
+  ],
+  "examples": 1340
+}

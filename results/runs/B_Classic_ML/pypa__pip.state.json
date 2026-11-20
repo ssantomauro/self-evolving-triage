@@ -1,0 +1,20 @@
+{
+  "bot": "B. Classic ML",
+  "repo": "pypa/pip",
+  "seconds": 12.9,
+  "trained_labels": [
+    "C: dependency resolution",
+    "C: error messages",
+    "C: network connectivity",
+    "project: vendored dependency",
+    "type: bug",
+    "type: deprecation",
+    "type: docs",
+    "type: enhancement",
+    "type: feature request",
+    "type: maintenance",
+    "type: performance",
+    "type: support"
+  ],
+  "examples": 1190
+}

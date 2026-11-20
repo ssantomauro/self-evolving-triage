@@ -1,0 +1,222 @@
+{
+  "bot": "D. Sage + learner",
+  "repo": "pydantic/pydantic",
+  "seconds": 1959.9,
+  "instructions": "Classify a new pydantic/pydantic issue with one primary label: bug V2, bug V1, feature request, question, or documentation. Bug-template reports default to bug V2 (including broken doc examples, docs site failures, JSON schema regressions). Use question when behavior is intended, user error, an existing option already covers it, or a V1\u2192V2 change. Topic labels are rare: never add them to ordinary bugs; only add one when the issue is about that subsystem's design or internals.",
+  "definitions": {
+    "bug V2": "Default for V2 bug reports: crashes, wrong output, regressions, JSON schema output bugs, broken docs examples or docs site, missing support for typing qualifiers (e.g. ReadOnly), mypy/pyright false positives. Not intended behavior, user error, or V1\u2192V2 changes (question).",
+    "bug V1": "Defect in Pydantic V1.x or pydantic.v1, including V1-template reports (\"searched GitHub for a duplicate\", V1 version output), even about JSON schema. Third-party libraries mixing V1/V2 are question.",
+    "feature request": "New capability on feature template or clearly new: PEP-696 TypeVar defaults, validating generic parametrizations against bounds, new schema options, new APIs, new warnings. If an existing option already does it, use question.",
+    "question": "Intended/documented behavior or user error: errors re-raised in validators, str subclasses needing core schema hooks, V1\u2192V2 validator behavior changes, data loss from model design, requests already covered by existing config (e.g. validate_default).",
+    "documentation": "Rare; docs-only gaps explaining intended behavior. Broken doc examples, wrong documented attributes, or docs not loading are bug V2 alone; add documentation only for docs-site tooling failures (e.g. Run Code button) alongside bug V2.",
+    "topic-mypy plugin": "Only when pydantic's mypy plugin (pydantic.mypy) itself crashes or misbehaves. Not for general mypy/pyright type errors on pydantic fields (bug V2 alone).",
+    "topic-generics": "Rarely applied. Do not add to bugs or feature requests involving generic models, TypeVars, or making classes generic; use the primary label alone.",
+    "topic-performance": "Speed/memory issues or internal refactors of core machinery (core metadata, decorator inspection, namespace handling). Not for serialization feature ideas.",
+    "topic-json schema": "Rarely applied. Do not add to JSON schema bugs, regressions, or feature requests about model_json_schema output; use the primary label alone. Only for broad JSON schema generator design discussions.",
+    "topic-serialization": "Rarely applied. Do not add to ordinary bugs, questions, or features about model_dump/serializers; use the primary label alone.",
+    "topic-validators-serializers": "Rarely applied. Only for design discussions about validator/serializer decorators themselves; not for ordinary bugs or questions using them.",
+    "topic-annotations": "Rarely applied. Only for design issues about Annotated metadata handling itself; not for issues merely using Annotated."
+  },
+  "cutoffs": {
+    "bug V2": 0.6,
+    "feature request": 0.8,
+    "question": 0.5,
+    "documentation": 0.65,
+    "bug V1": 0.1,
+    "topic-performance": 0.85,
+    "topic-generics": 0.9,
+    "topic-json schema": 0.1,
+    "topic-mypy plugin": 0.1,
+    "topic-serialization": 0.8,
+    "topic-annotations": 0.1
+  },
+  "spec_log": [
+    {
+      "at_issue": 0,
+      "event": "initial",
+      "instructions": "This is a new GitHub issue filed in the pydantic/pydantic repository. Decide which labels the maintainers would apply to it. A label applies only when the issue is clearly about that topic.",
+      "definitions": {
+        "bug V2": "Bug related to Pydantic V2",
+        "bug V1": "Bug related to Pydantic V1.X",
+        "feature request": "",
+        "question": "",
+        "documentation": "",
+        "topic-mypy plugin": "Related to the mypy plugin",
+        "topic-generics": "Related to generics",
+        "topic-performance": "",
+        "topic-json schema": "Related to JSON Schema",
+        "topic-serialization": "How Pydantic serializes data, often related to `model_dump`, etc.",
+        "topic-validators-serializers": "Related to model/field validators/serializers",
+        "topic-annotations": ""
+      }
+    },
+    {
+      "at_issue": 160,
+      "event": "accepted",
+      "holdout_f1_current": 0.6309,
+      "holdout_f1_candidate": 0.72,
+      "instructions": "Classify a new pydantic/pydantic issue. Usually apply exactly ONE primary label: bug V2, bug V1, feature request, question, documentation, or topic-performance. Topic labels (generics, json schema, serialization, validators-serializers, annotations, mypy plugin) are rarely applied; do not add them just because the issue touches that area. The issue template the reporter picked (bug vs feature) is a hint, not proof: judge whether the behavior is a real defect, a missing capability, or user misunderstanding.",
+      "definitions": {
+        "bug V2": "Genuine defect in Pydantic V2: crashes, wrong output, wrong JSON schema, unwanted warnings, regressions or undocumented breaking changes for supported features. Not for unsupported typing constructs (feature request) or user misuse/expected behavior (question).",
+        "bug V1": "Defect in Pydantic V1.x, including the pydantic.v1 compatibility namespace or V1 utilities. Use instead of bug V2 when the report concerns V1 code.",
+        "feature request": "Request for new capability or support: new typing constructs (Never, variadic generics, PEP 695), new schema output, better error messages, new APIs/hooks. Applies even if missing support raises an error. Not for performance-only proposals.",
+        "question": "Reporter thinks it's a bug or missing feature but it's actually expected behavior, misuse, misconfiguration, or answerable with existing APIs; also reports where reporter is unsure whether behavior is intended (validators, enums, config, generics inheritance, type checkers).",
+        "documentation": "Issue whose resolution is a docs change: requests for examples, confusing or undocumented behavior (e.g. config differences, V1\u2192V2 migration inconsistencies) where code works as designed but docs should explain it.",
+        "topic-mypy plugin": "Specifically about pydantic's mypy plugin behavior. Not for general type-checker complaints about pydantic signatures.",
+        "topic-generics": "Rarely applied. Only for maintainer-level design work on generic models; do not add to bug reports or feature requests that merely involve generic models.",
+        "topic-performance": "Proposals or reports focused on speed/memory, e.g. avoiding revalidation or optimizing validation paths. Use as the primary label instead of feature request for optimization ideas.",
+        "topic-json schema": "Rarely applied. Do not add to bug reports or feature requests about JSON schema output; use bug V2 or feature request alone.",
+        "topic-serialization": "Rarely applied. Do not add to bug reports, questions, or features about model_dump/serializers; use the primary label alone.",
+        "topic-validators-serializers": "Rarely applied. Only for design discussions about validator/serializer decorators themselves; not for ordinary bugs or questions using them.",
+        "topic-annotations": "Rarely applied. Only for design issues about Annotated metadata handling itself; not for issues merely using Annotated."
+      }
+    },
+    {
+      "at_issue": 320,
+      "event": "accepted",
+      "holdout_f1_current": 0.7656,
+      "holdout_f1_candidate": 0.8209,
+      "instructions": "Classify a new pydantic/pydantic issue. Apply one primary label: bug V2, bug V1, feature request, question, documentation, or topic-performance (for internal refactors/optimizations). Add topic labels (json schema, generics, performance) when the issue is centrally about that area. Bug-template reports default to bug V2, including tooling, type-checker, test-suite, packaging or dependency complaints; use question only when the behavior is clearly documented or intended. Missing support for valid Python patterns is a feature request.",
+      "definitions": {
+        "bug V2": "Default for V2 bug-template reports: crashes, wrong output, regressions, type-checker/IDE/pyright problems with pydantic types, test-suite failures, unwanted dependencies, surprising config interactions, even if later deemed non-issues. Not for clearly documented intended behavior (question).",
+        "bug V1": "Genuine defect in Pydantic V1.x or the pydantic.v1 namespace. Third-party libraries (e.g. langchain) misusing V1 aliases or mixing versions are question, not bug V1.",
+        "feature request": "New capability: unsupported typing constructs or patterns (future annotations with generic functions, mocks of generics, BOM-prefixed JSON), new errors/warnings for invalid usage, schema simplifications, new APIs, internal robustness guarantees.",
+        "question": "Reported behavior is intended/documented: strict mode allowing int\u2192float, field_validator('*') not covering extras, strict not propagating into RootModel, mutating model_fields, user-error regressions, lazy/forward-ref imports needing model_rebuild.",
+        "documentation": "Intended behavior changed from V1 or not explained, where the fix is docs (e.g. validator ordering in inheritance, V1/V2 mixing guidance). Missing rendered doc sections from broken docs build are bug V2.",
+        "topic-mypy plugin": "Specifically about pydantic's mypy plugin behavior. Not for general mypy/pyright typing complaints about pydantic types (bug V2).",
+        "topic-generics": "Add when the issue centrally involves generic models/TypeVars: bugs in generic model schema building, defaults via generics, generic type validation; may be the sole label for generic design requests.",
+        "topic-performance": "Speed/memory or internal refactors of core machinery (core metadata, decorator inspection, namespace handling); can be primary for refactor proposals or added to related bugs. Not for wire-format/serialization feature ideas (feature request).",
+        "topic-json schema": "Add alongside feature request when the request is about JSON schema generation output or model_json_schema APIs (schema simplification, reusing refs/definitions).",
+        "topic-serialization": "Rarely applied. Do not add to ordinary bugs, questions, or features about model_dump/serializers; use the primary label alone.",
+        "topic-validators-serializers": "Rarely applied. Only for design discussions about validator/serializer decorators themselves; not for ordinary bugs or questions using them.",
+        "topic-annotations": "Rarely applied. Only for design issues about Annotated metadata handling itself; not for issues merely using Annotated."
+      }
+    },
+    {
+      "at_issue": 480,
+      "event": "rejected",
+      "holdout_f1_current": 0.7007,
+      "holdout_f1_candidate": 0.6912,
+      "instructions": "Classify a new pydantic/pydantic issue. Pick one primary label: bug V2, bug V1, feature request, question, documentation, or topic-performance (version-to-version speed regressions/refactors). Bug-template reports default to bug V2, including docs-content complaints, tooling/pyupgrade/type annotation fixes, slowness in specific features. Use question when the reporter misuses the API or behavior is intended. Topic labels are rare: never add json schema/generics to ordinary bugs; add topic labels mainly to feature requests.",
+      "definitions": {
+        "bug V2": "Default for V2 bug-template reports: crashes, wrong output, inconsistencies, docs pages confusing/incorrect, internal annotation/code-cleanup issues, slow specific features (construct, regex, mypy), abstract/generic usage failing. Not for user misuse (question) or new-version perf regressions (topic-performance).",
+        "bug V1": "Defect occurring in Pydantic V1.x or pydantic.v1 namespace; check versions/tracebacks (e.g. V1 paths, inspect signature errors) even if bug template says V2. Third-party libs mixing versions are question.",
+        "feature request": "Feature-template requests for new capabilities: unsupported types/patterns, new APIs, richer warnings, translations of docs. Not for bug-template reports of broken behavior (bug V2), even if fix seems like an enhancement.",
+        "question": "Reporter misunderstands or misuses pydantic: model_validator seeing raw input not aliases, TypeAdapter as field type, private attrs on class, config interactions working as designed, requests already achievable with existing features.",
+        "documentation": "Intended behavior change undocumented (e.g. changelog missing breaking schema change), or unclear recommended workflow; may accompany bug V2. Not for bug-template complaints about doc page content (bug V2) or doc translations (feature request).",
+        "topic-mypy plugin": "Specifically about pydantic's mypy plugin behavior. Not for general mypy/pyright slowness or typing complaints (bug V2).",
+        "topic-generics": "Rare. Add with bug V2 only when pydantic's generic parametrization itself breaks (Model[X] equality/identity, subclassing Generic in dataclasses). Not for user models merely using TypeVars, Self, nested generics, or typing annotations.",
+        "topic-performance": "Primary (alone, no bug V2) for speed regressions between pydantic releases or core refactor/optimization proposals. Slowness in specific features, edge-case regex, mypy runs, or namespace-handling revisits are bug V2.",
+        "topic-json schema": "Add only alongside feature request for JSON schema generation output/API requests. Never add to bug reports about schema inconsistencies (bug V2) or documentation issues.",
+        "topic-serialization": "Add alongside feature request for serialization feature ideas (model_dump, serializer warnings/messages). Not for ordinary serialization bugs or questions.",
+        "topic-validators-serializers": "Rarely applied. Only for design discussions about validator/serializer decorators themselves; not for ordinary bugs, questions, or features using them.",
+        "topic-annotations": "Rarely applied. Only for design issues about Annotated metadata handling itself; not for issues merely using Annotated."
+      }
+    },
+    {
+      "at_issue": 640,
+      "event": "rejected",
+      "holdout_f1_current": 0.8722,
+      "holdout_f1_candidate": 0.8769,
+      "instructions": "Classify a new pydantic/pydantic issue with exactly one primary label: bug V2, bug V1, feature request, question, or documentation. Topic labels are rarely added by maintainers; omit them unless the definition explicitly fits. Bug-template reports default to bug V2 (including docs-site outages, linter/type-checker complaints, regressions), except: question when the change is an intended consequence of a deliberate redesign or invalid user input; feature request when asking for restored/extra capability (e.g. comparisons, optional dependencies).",
+      "definitions": {
+        "bug V2": "Default for V2 bug reports: crashes, wrong output, JSON schema generation errors, generics failures, lint/type-checker/IDE complaints, docs site down, regressions not caused by intentional redesign. Use alone without topic labels.",
+        "bug V1": "Genuine defect in Pydantic V1.x or the pydantic.v1 namespace. Third-party libraries misusing V1 aliases or mixing versions are question.",
+        "feature request": "New capability or enhancement: new APIs/options, JSON schema additions, unsupported patterns, swapping dependencies for speed, missing operators (e.g. URL ordering) lost after redesign, dependency/packaging requests. Use alone without topic labels.",
+        "question": "Reported behavior is intended: consequences of deliberate redesigns (e.g. URL types no longer subclassing core Url, stricter URL/DSN parsing, URL repr), unvalidated invalid defaults, user-error usage, documented strict-mode semantics, model_rebuild needs.",
+        "documentation": "Request to update or clarify docs content (explanations, examples, migration guidance). Site outages or broken builds are bug V2.",
+        "topic-mypy plugin": "Specifically about pydantic's mypy plugin design/behavior requests. Not for general mypy/pyright complaints or crashes reported as bugs (bug V2 alone).",
+        "topic-generics": "Very rarely applied. Do not add to bugs or features involving generic models, TypeVars, or PEP 695 syntax; use primary label alone. Only for broad generics design discussions.",
+        "topic-performance": "Rarely applied. Only for internal refactors/optimizations of pydantic's own core machinery proposed by maintainers. Not for feature requests mentioning speed or dependency swaps.",
+        "topic-json schema": "Very rarely applied. Do not add to JSON schema bugs, feature requests, or docs issues; use primary label alone. Only for broad JSON schema architecture discussions.",
+        "topic-serialization": "Rarely applied. Only for bugs where serialization itself emits spurious warnings/errors from pydantic-core serializers (e.g. unexpected serializer UserWarning). Not for ordinary model_dump questions or features.",
+        "topic-validators-serializers": "Rarely applied. Only for design discussions about validator/serializer decorators themselves; not for ordinary bugs or questions using them.",
+        "topic-annotations": "Rarely applied. Only for design issues about Annotated metadata handling itself; not for issues merely using Annotated."
+      }
+    },
+    {
+      "at_issue": 800,
+      "event": "accepted",
+      "holdout_f1_current": 0.8079,
+      "holdout_f1_candidate": 0.8702,
+      "instructions": "Classify a new pydantic/pydantic issue with one primary label: bug V2, bug V1, feature request, question, or documentation. Bug-template reports default to bug V2 (including broken doc examples, docs site failures, JSON schema regressions). Use question when behavior is intended, user error, an existing option already covers it, or a V1\u2192V2 change. Topic labels are rare: never add them to ordinary bugs; only add one when the issue is about that subsystem's design or internals.",
+      "definitions": {
+        "bug V2": "Default for V2 bug reports: crashes, wrong output, regressions, JSON schema output bugs, broken docs examples or docs site, missing support for typing qualifiers (e.g. ReadOnly), mypy/pyright false positives. Not intended behavior, user error, or V1\u2192V2 changes (question).",
+        "bug V1": "Defect in Pydantic V1.x or pydantic.v1, including V1-template reports (\"searched GitHub for a duplicate\", V1 version output), even about JSON schema. Third-party libraries mixing V1/V2 are question.",
+        "feature request": "New capability on feature template or clearly new: PEP-696 TypeVar defaults, validating generic parametrizations against bounds, new schema options, new APIs, new warnings. If an existing option already does it, use question.",
+        "question": "Intended/documented behavior or user error: errors re-raised in validators, str subclasses needing core schema hooks, V1\u2192V2 validator behavior changes, data loss from model design, requests already covered by existing config (e.g. validate_default).",
+        "documentation": "Rare; docs-only gaps explaining intended behavior. Broken doc examples, wrong documented attributes, or docs not loading are bug V2 alone; add documentation only for docs-site tooling failures (e.g. Run Code button) alongside bug V2.",
+        "topic-mypy plugin": "Only when pydantic's mypy plugin (pydantic.mypy) itself crashes or misbehaves. Not for general mypy/pyright type errors on pydantic fields (bug V2 alone).",
+        "topic-generics": "Rarely applied. Do not add to bugs or feature requests involving generic models, TypeVars, or making classes generic; use the primary label alone.",
+        "topic-performance": "Speed/memory issues or internal refactors of core machinery (core metadata, decorator inspection, namespace handling). Not for serialization feature ideas.",
+        "topic-json schema": "Rarely applied. Do not add to JSON schema bugs, regressions, or feature requests about model_json_schema output; use the primary label alone. Only for broad JSON schema generator design discussions.",
+        "topic-serialization": "Rarely applied. Do not add to ordinary bugs, questions, or features about model_dump/serializers; use the primary label alone.",
+        "topic-validators-serializers": "Rarely applied. Only for design discussions about validator/serializer decorators themselves; not for ordinary bugs or questions using them.",
+        "topic-annotations": "Rarely applied. Only for design issues about Annotated metadata handling itself; not for issues merely using Annotated."
+      }
+    },
+    {
+      "at_issue": 960,
+      "event": "rejected",
+      "holdout_f1_current": 0.7786,
+      "holdout_f1_candidate": 0.7075,
+      "instructions": "Pick one primary label by template first: bug-template (\"I confirm that I'm using Pydantic V2\") \u2192 bug V2, even for V1\u2192V2 behavior changes, outdated-doc confusion, or likely user error; feature-template \u2192 feature request, even if answerable. Use question only for clear how-to requests without a bug claim. Bug-template issues proposing a new check/warning \u2192 feature request. Add a topic label only when the bug's core is that subsystem's behavior; never add topic-mypy plugin.",
+      "definitions": {
+        "bug V2": "Default for V2 bug-template reports: crashes, regressions, wrong output, V1\u2192V2 breaking changes, mypy/plugin false positives, Protocol/typing issues, docs build scripts or broken examples. Not when proposing new validation checks/warnings (feature request).",
+        "bug V1": "Defect in Pydantic V1.x or pydantic.v1 on V1-template reports (V1 version output). Issues using pydantic.v1 models under a V2 install, e.g. JSON schema errors, are bug V2.",
+        "feature request": "Any feature-template issue (\"still think this feature is missing\"), even if existing APIs might cover it; also bug-template issues asking for new checks, warnings, APIs, or options rather than reporting broken behavior.",
+        "question": "Rare. Pure how-to or usage help with no claimed bug and no feature template. Bug-template reports of surprising behavior, V1\u2192V2 changes, or naming conflicts are bug V2, not question.",
+        "documentation": "Docs text that is inaccurate, outdated, or contradicts actual behavior (e.g. docs claim a constraint that isn't enforced); use alone. Docs build scripts, source paths, or broken examples are bug V2 instead.",
+        "topic-mypy plugin": "Essentially never applied; mypy plugin crashes, false positives, or inference issues get bug V2 alone.",
+        "topic-generics": "Add alongside bug V2 when the bug centrally involves generic models: parametrized BaseModel/RootModel, TypeVar handling, nested or self-referencing generic models. Not for incidental TypeVar use.",
+        "topic-performance": "Speed/memory issues or internal refactors of core machinery (core metadata, decorator inspection, namespace handling). Not for serialization feature ideas.",
+        "topic-json schema": "Rarely applied. Not for ordinary JSON schema bugs or errors generating schemas; use primary label alone. Only for broad JSON schema generator design discussions.",
+        "topic-serialization": "Add alongside bug V2 when model_dump/serialization machinery itself misbehaves, e.g. include/exclude interacting with model_serializer. Not for questions or simple field-output complaints.",
+        "topic-validators-serializers": "Rarely applied. Only for design discussions about validator/serializer decorators themselves; not for ordinary bugs or questions using them.",
+        "topic-annotations": "Add when the bug concerns how Annotated metadata is applied or ordered (e.g. After/Wrap/Before validator interaction order within Annotated). Not for issues merely using Annotated."
+      }
+    },
+    {
+      "at_issue": 1120,
+      "event": "rejected",
+      "holdout_f1_current": 0.8806,
+      "holdout_f1_candidate": 0.7871,
+      "instructions": "Classify each pydantic/pydantic issue with one primary label: bug V2, bug V1, feature request, question, or documentation. Bug-template reports default to bug V2 even if the reporter is unsure, mentions migration, or user error is possible; question is rare. Use feature request for proposals of new or unsupported capabilities, including maintainer-written 'Add/Allow/Support...' issues. Add topic labels for JSON schema, serialization, generics, and annotations issues (bugs or features); topic-performance is rare.",
+      "definitions": {
+        "bug V2": "Default for V2 bug-template reports: crashes, wrong output, unexpected validation errors, regressions, memory leaks, slowness, export/typing problems, broken docs examples. Applies even when reporter is unsure whether it's a bug or mentions V1\u2192V2 migration.",
+        "bug V1": "Defect in Pydantic V1.x or pydantic.v1, including V1-template reports (V1 version output). Third-party libraries mixing V1/V2 are question.",
+        "feature request": "Proposal for new or not-yet-supported behavior: feature template, maintainer 'Add/Allow/Support' issues, new APIs/options, changing designed behavior (e.g. run all validators, class field access), unsupported JSON schema constructs (oneOf, enum items), new Python features.",
+        "question": "Rare. Only for clear usage help or how-to questions with no claimed defect, or explicitly intended documented behavior. Bug-template reports with unexpected behavior are bug V2, not question.",
+        "documentation": "Rare; docs-only gaps or improvements. Broken doc examples or docs not loading are bug V2 alone; add documentation alongside bug V2 only for docs-site tooling failures (e.g. Run Code button).",
+        "topic-mypy plugin": "Only when pydantic's mypy plugin (pydantic.mypy) itself crashes or misbehaves. Not for general mypy/pyright type errors (bug V2 alone).",
+        "topic-generics": "Add for bugs or features centered on generic models/TypeVar parametrization behavior, e.g. generic subclasses coerced to base, parametrized models misbehaving. Not when generics are incidental.",
+        "topic-performance": "Rare. Only for internal refactors/optimization work of core machinery (core metadata, decorator inspection, namespace handling). Not for user-reported slowness, memory usage, or leaks (bug V2 alone).",
+        "topic-json schema": "Add to any issue about JSON schema generation: model_json_schema/TypeAdapter schema bugs, crashes, $ref/$defs handling, mode overrides, and requested schema options (oneOf, enum vs const, suffixes).",
+        "topic-serialization": "Add to bugs or features about serialization behavior: model_dump/JSON output, union serialization choice, conditional field exclusion, serializer functions or multiple serializers.",
+        "topic-validators-serializers": "Design or feature issues about the validator/serializer decorators themselves (e.g. multiple serializers per field). Not for ordinary bugs or questions using them.",
+        "topic-annotations": "Issues about Annotated metadata/constraint handling, e.g. custom types combined with constraints behaving differently from built-ins. Not for issues merely using Annotated."
+      }
+    },
+    {
+      "at_issue": 1280,
+      "event": "rejected",
+      "holdout_f1_current": 0.7519,
+      "holdout_f1_candidate": 0.6667,
+      "instructions": "Pick one primary label: bug V2, bug V1, feature request, question, or documentation. Bug-template reports default to bug V2, including spam, invalid or withdrawn ones, and naive complaints like coercion surprises. Use feature request when the reporter wants designed behavior changed or extended (new type combinations, preserving types, copy semantics, opt-outs). Use question for misread docs or user error. Add a topic label only when the defect or request lies in that subsystem's internal machinery.",
+      "definitions": {
+        "bug V2": "Default for V2 bug-template reports, including spam/invalid/withdrawn ones: crashes, wrong output, regressions, memory leaks or memory increases, JSON schema bugs, broken docs examples, type-checker false positives. Not requests to change designed behavior (feature request).",
+        "bug V1": "Defect in Pydantic V1.x or pydantic.v1, including V1-template reports (V1 version output). Third-party libraries mixing V1/V2 are question.",
+        "feature request": "New or changed capability, even on bug template: support new type/feature combinations (RootModel discriminators, arbitrary TypeVar bounds), preserve subclasses, change copy/Json/docstring-to-schema behavior, override inherited validators, GC/performance options.",
+        "question": "Reporter misreads documented semantics or makes user error: e.g. annotated-types constraints that only check rather than transform, errors re-raised in validators, needs existing config. Not requests to change design (feature request).",
+        "documentation": "Rare; docs-only gaps. Broken doc examples or docs not loading are bug V2 alone; add documentation only for docs-site tooling failures (e.g. Run Code button) alongside bug V2.",
+        "topic-mypy plugin": "Only when pydantic's mypy plugin (pydantic.mypy) itself crashes or misbehaves. Not general mypy/pyright errors on pydantic fields.",
+        "topic-generics": "Add with primary label when the issue concerns generic model machinery: TypeVar substitution/parametrization, TypeVar bounds/constraints/defaults, FieldInfo after parametrization. Not for issues merely using a generic model incidentally.",
+        "topic-performance": "Very rare. Only internal refactors of core machinery for speed. Not memory leaks, memory usage regressions, or performance feature ideas (use bug V2 or feature request alone).",
+        "topic-json schema": "Add when the bug is in JSON schema generator internals (definitions/refs, duplicated or mis-named defs, mode Input/Output splitting). Not simple wrong field output or feature requests about schema content.",
+        "topic-serialization": "Add when the bug is in serializer internals (e.g. serializers for extra fields, core serializer selection/warnings). Not ordinary model_dump questions or feature ideas.",
+        "topic-validators-serializers": "Rarely applied. Only design discussions about validator/serializer decorators themselves; not ordinary bugs, questions, or override requests using them.",
+        "topic-annotations": "Add when the issue involves annotation handling internals: Annotated metadata combining (validators+constraints+Optional), forward refs/string annotation evaluation, model_fields annotations. Not issues merely using Annotated."
+      }
+    }
+  ]
+}

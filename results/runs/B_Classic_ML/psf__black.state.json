@@ -1,0 +1,20 @@
+{
+  "bot": "B. Classic ML",
+  "repo": "psf/black",
+  "seconds": 14.4,
+  "trained_labels": [
+    "C: configuration",
+    "C: crash",
+    "C: maintenance",
+    "C: packaging",
+    "C: preview style",
+    "F: docstrings",
+    "F: linebreak",
+    "F: strings",
+    "T: bug",
+    "T: documentation",
+    "T: enhancement",
+    "T: style"
+  ],
+  "examples": 1372
+}

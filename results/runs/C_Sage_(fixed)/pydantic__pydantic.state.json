@@ -1,0 +1,20 @@
+{
+  "bot": "C. Sage (fixed)",
+  "repo": "pydantic/pydantic",
+  "seconds": 164.7,
+  "instructions": "This is a new GitHub issue filed in the pydantic/pydantic repository. Decide which labels the maintainers would apply to it. A label applies only when the issue is clearly about that topic.",
+  "definitions": {
+    "bug V2": "Bug related to Pydantic V2",
+    "bug V1": "Bug related to Pydantic V1.X",
+    "feature request": "",
+    "question": "",
+    "documentation": "",
+    "topic-mypy plugin": "Related to the mypy plugin",
+    "topic-generics": "Related to generics",
+    "topic-performance": "",
+    "topic-json schema": "Related to JSON Schema",
+    "topic-serialization": "How Pydantic serializes data, often related to `model_dump`, etc.",
+    "topic-validators-serializers": "Related to model/field validators/serializers",
+    "topic-annotations": ""
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "bot": "C. Sage (fixed)",
+  "repo": "python-poetry/poetry",
+  "seconds": 1969.9,
+  "instructions": "This is a new GitHub issue filed in the python-poetry/poetry repository. Decide which labels the maintainers would apply to it. A label applies only when the issue is clearly about that topic.",
+  "definitions": {
+    "kind/bug": "Something isn't working as expected",
+    "kind/feature": "Feature requests/implementations",
+    "kind/question": "User questions (candidates for conversion to discussion)",
+    "area/docs": "Documentation issues/improvements",
+    "area/installer": "Related to the dependency installer",
+    "area/solver": "Related to the dependency resolver",
+    "area/core": "Related to the poetry-core library",
+    "area/cli": "Related to the command line",
+    "area/deps": "Related to representing and locking dependencies",
+    "area/venv": "Related to virtualenv management",
+    "area/sources": "Releated to package sources/indexes/repositories",
+    "area/vcs": "Related to support for VCS dependencies (Git and Dulwich)"
+  }
+}

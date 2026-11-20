@@ -1,0 +1,65 @@
+{
+  "bot": "A. Rules",
+  "repo": "python-poetry/poetry",
+  "seconds": 0.4,
+  "kind/bug": [
+    "\\bbug\\b",
+    "\\berror\\b",
+    "exception",
+    "traceback",
+    "\\bcrash",
+    "doesn'?t work",
+    "\\bbroken\\b",
+    "\\bfails?\\b",
+    "unexpected",
+    "incorrect",
+    "wrong"
+  ],
+  "kind/feature": [
+    "feature request",
+    "\\bfeature\\b",
+    "would be nice",
+    "\\bsupport for\\b",
+    "\\badd (a|an|support)\\b",
+    "\\ballow\\b",
+    "\\bproposal\\b",
+    "\\benhancement\\b"
+  ],
+  "kind/question": [
+    "^how (do|can|to|should)\\b",
+    "\\bquestion\\b",
+    "\\bis it possible\\b",
+    "\\bhelp\\b"
+  ],
+  "area/docs": [
+    "\\bdocs?\\b",
+    "documentation",
+    "readme",
+    "\\btypo\\b",
+    "docstring example"
+  ],
+  "area/installer": [
+    "\\binstaller"
+  ],
+  "area/solver": [
+    "\\bsolver"
+  ],
+  "area/core": [
+    "\\bcore"
+  ],
+  "area/cli": [
+    "\\bcli"
+  ],
+  "area/deps": [
+    "\\bdep"
+  ],
+  "area/venv": [
+    "\\bvenv"
+  ],
+  "area/sources": [
+    "\\bsource"
+  ],
+  "area/vcs": [
+    "\\bvc"
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "bot": "D. Sage + learner",
+  "repo": "pypa/pip",
+  "seconds": 3478.5,
+  "instructions": "New pypa/pip issue. Use few labels: usually one 'type:' label. Bug-template reports are NOT automatically 'type: bug': most user failures (broken environment, install errors, permissions, odd platforms, vague 'pip doesn't work') get 'type: support'. Use 'type: bug' only for clear, reproducible pip logic defects. Feature-template issues get 'type: feature request' unless they propose deprecation/removal or project policy. Add 'C:'/'project:' labels only when clearly the core subject. When in doubt, omit.",
+  "definitions": {
+    "type: bug": "Clear, reproducible defect in pip's own logic or code, including inaccurate code comments and invalid input accepted silently. Not for user environment/install failures, tracebacks from broken setups, or Windows Store/permission quirks (those are support).",
+    "type: feature request": "Feature-template requests: new options, changed defaults, CI test additions, metadata/platform support, more context in errors. Not for proposals to deprecate/remove pip functionality (deprecation) or project policy/repo admin (maintenance).",
+    "type: support": "Common. Bug-template reports where the user's environment, installation, Python distribution (MS Store, conda, embedded), shadowed modules, permissions, corrupt downloads, or misunderstanding is likely the cause, or the report is vague/unreproducible.",
+    "type: maintenance": "Project administration: GitHub issue templates/repo settings, contributor policies (e.g. AI-generated PRs), release tooling. Not for feature-template proposals to add CI tests (feature request).",
+    "type: docs": "Request to add or fix pip's published documentation. Not for typos in source code comments (bug) or behavior changes that also need docs.",
+    "type: enhancement": "Small polish of existing pip output reported via bug template, e.g. ordering of versions in messages or outdated command suggestions in notices. Not real defects; don't combine with bug or feature request.",
+    "type: deprecation": "Proposals or tracking to deprecate and remove pip functionality or code paths (legacy setup.py builds, pkg_resources backend), or pip's deprecation notices. Use instead of feature request for such proposals.",
+    "type: performance": "pip commands themselves are slow in normal use and the issue is about speed. Not for slow test suites.",
+    "C: error messages": "Issue centers on what pip reports on failure: unhandled exceptions needing a clear message, misleading/wrong error text, resolver failure messages (ResolutionTooDeep, conflicts), requests for more error context. Not for message ordering polish (enhancement).",
+    "C: dependency resolution": "Rare. Resolver conflict/backtracking reports or collections (ResolutionTooDeep, dependency conflicts), usually alongside C: error messages. Not for specific bugs with --python-version, ResolutionImpossible bugs, metadata sourcing, or error-context feature requests.",
+    "C: network connectivity": "Proxy, SSL context/truststore, and download retry/resume behavior. Not for HTTP caching bugs.",
+    "project: vendored dependency": "Requests to upgrade/patch a vendored library, or bugs rooted in vendored/build-isolation import behavior. Not for proxy/SSL issues, HTTP caching, platform support, or removing pip features."
+  },
+  "cutoffs": {
+    "type: bug": 0.1,
+    "type: feature request": 0.6,
+    "type: support": 0.1,
+    "type: maintenance": 0.85,
+    "type: deprecation": 0.45,
+    "C: error messages": 0.15,
+    "project: vendored dependency": 0.5,
+    "type: docs": 0.75,
+    "type: enhancement": 0.1,
+    "C: dependency resolution": 0.85,
+    "C: network connectivity": 0.75,
+    "type: performance": 0.9
+  },
+  "spec_log": [
+    {
+      "at_issue": 0,
+      "event": "initial",
+      "instructions": "This is a new GitHub issue filed in the pypa/pip repository. Decide which labels the maintainers would apply to it. A label applies only when the issue is clearly about that topic.",
+      "definitions": {
+        "type: bug": "A confirmed bug or unintended behavior",
+        "type: feature request": "Request for a new feature",
+        "type: support": "User Support",
+        "type: maintenance": "Related to Development and Maintenance Processes",
+        "type: docs": "Documentation related",
+        "type: enhancement": "Improvements to functionality",
+        "type: deprecation": "Related to deprecation / removal.",
+        "type: performance": "Commands take too long to run",
+        "C: error messages": "Improving error messages",
+        "C: dependency resolution": "About choosing which dependencies to install",
+        "C: network connectivity": "",
+        "project: vendored dependency": "Related to a vendored dependency"
+      }
+    },
+    {
+      "at_issue": 160,
+      "event": "accepted",
+      "holdout_f1_current": 0.5769,
+      "holdout_f1_candidate": 0.7761,
+      "instructions": "This is a new issue in pypa/pip. Maintainers label sparingly: usually exactly one 'type:' label, chosen mainly by issue template. 'Description / Expected behavior / How to Reproduce' issues get 'type: bug', even if the user may be at fault. 'What's the problem this feature will solve?' issues get 'type: feature request'. Add a 'C:' or 'project:' label only when that area is clearly the core subject. When in doubt, omit extra labels.",
+      "definitions": {
+        "type: bug": "Default for bug-report-template issues: pip misbehaves, errors, crashes, hangs, emits wrong output or warnings. Includes install/upgrade failures, permission errors, and odd platform behavior. Not for feature-template requests.",
+        "type: feature request": "Any issue using the feature-request template: new options, changed defaults, new output formats, new warnings, refactors like replacing a deprecated stdlib module. Prefer this over 'type: enhancement'.",
+        "type: support": "Rare. Only when the issue is clearly a user's local setup or usage question, e.g. trouble running pip's test suite locally or misunderstanding intended behavior. Bug-template failure reports normally get 'type: bug' instead.",
+        "type: maintenance": "Rare. Work on pip's own CI, release tooling, or development infrastructure proposed by maintainers. Not for users having trouble running tests locally (support/bug) or test issues.",
+        "type: docs": "Request primarily to add or fix documentation, e.g. 'document that X is supported'. Not for policy questions or behavior changes that would merely also need docs.",
+        "type: enhancement": "Almost never used; feature-template requests get 'type: feature request' instead. Do not apply alongside feature request or bug.",
+        "type: deprecation": "About pip's own deprecation notices or removals being shown/spammed to users (e.g. distutils deprecation warnings). Not for suggestions that pip stop using deprecated Python modules, nor bugs in warning display.",
+        "type: performance": "pip commands themselves are slow in normal use and the issue is about speed. Not for slow test suites or slow initialization reported as bugs.",
+        "C: error messages": "Rare. Only when the request is specifically about the format/content of reported errors (e.g. machine-readable errors). Not for misleading resolver messages, warnings, tracebacks, or output stream bugs.",
+        "C: dependency resolution": "Bugs in the resolver's choice of versions or its ResolutionImpossible reporting. Not merely because requirements, extras, build requirements, conflicts, or downloads are mentioned.",
+        "C: network connectivity": "Almost never applied. Proxy, SSL, index content-type, and session issues are labeled bug (or vendored dependency) instead. Only use if the issue is purely about connectivity design.",
+        "project: vendored dependency": "The root cause lies in a vendored library (requests, urllib3, packaging, etc.) or requires upgrading/patching one, e.g. proxy handling bugs inside requests/urllib."
+      }
+    },
+    {
+      "at_issue": 320,
+      "event": "rejected",
+      "holdout_f1_current": 0.6667,
+      "holdout_f1_candidate": 0.5816,
+      "instructions": "New issue in pypa/pip. Maintainers usually apply exactly ONE label, normally a 'type:' label chosen mainly by template: bug template \u2192 'type: bug'; feature template \u2192 'type: feature request'. Exceptions are listed in definitions (support, docs, enhancement). 'C:' and 'project:' labels are rare: never add them just because the topic is mentioned (resolver, vendored code, error text). Never combine bug with feature request, support or enhancement. When in doubt, use only the template-based type label.",
+      "definitions": {
+        "type: bug": "Default for bug-template issues: failures, crashes, wrong versions chosen, version parsing, encoding errors, vendored-library crashes, test-suite breakage. Use alone; don't add C:/project: labels. Not for feature-template issues.",
+        "type: feature request": "Default for feature-template issues ('What's the problem this feature will solve?'), including resolver algorithm ideas, unless it's a docs request or a how-to question. Also proposals to stop relying on interpreter features. Never with bug.",
+        "type: support": "A specific third-party package fails to build/install for the user (compiler, wheel missing, non-English plea), distro-packaged pip broken by upgrading, or asking how to do something pip already supports. Use instead of bug.",
+        "type: maintenance": "Rare. Internal code-correctness/cleanup in pip's own codebase raised by Python/pip developers (e.g. improper subclassing of stdlib ABCs), CI or release tooling. Not user-facing failures or requests to update a vendored library.",
+        "type: docs": "Issue primarily asks to add or change documentation (warnings, notes, clarifications), even if filed via the feature template. Use instead of feature request.",
+        "type: enhancement": "Rare. Bug-template reports where pip works as designed but could be better: clearer error message, more robust upgrade handling, different display (e.g. pip show location). Use instead of bug; never with feature request.",
+        "type: deprecation": "Rare. Discussion of pip's own deprecation policy/removal plans. Not for users pasting a DEPRECATION warning they saw while installing (that's bug).",
+        "type: performance": "Issue is chiefly about pip commands being slow in normal use. Not slow test suites.",
+        "C: error messages": "Main subject is improving error message wording or noise (misleading 'no matching version' errors, noisy conflict output, unclear ValueErrors). Not for crashes, tracebacks, encoding bugs, or HTTP handling bugs.",
+        "C: dependency resolution": "Rare. Resolver behavior itself: nondeterministic install ordering, ResolutionImpossible message quality. Not for version parsing/normalization, wrong version picked, wheel tag preference, extras naming bugs, or backtracking feature ideas.",
+        "C: network connectivity": "Authentication or connectivity to private indexes (basic auth, tokens, proxies) failing during install. Use instead of bug for such reports. Not HTTP status/error-message complaints.",
+        "project: vendored dependency": "Rare. Non-crash issues where the fix must happen in vendored code, e.g. vendored pkg_resources using deprecated APIs or terminal input issues from vendored libs. Crash reports in vendored code get only bug."
+      }
+    },
+    {
+      "at_issue": 480,
+      "event": "rejected",
+      "holdout_f1_current": 0.8,
+      "holdout_f1_candidate": 0.702,
+      "instructions": "New pypa/pip issue. Usually apply exactly one 'type:' label plus at most one or two 'C:'/'project:' labels. Default by template: bug template \u2192 'type: bug'; feature template \u2192 'type: feature request'. Override only when the definitions clearly indicate support, enhancement, deprecation, maintenance or performance. Docs fixes filed as bugs stay 'type: bug'. Add component labels when the issue's mechanism clearly falls in that area, even if it's not the reporter's framing.",
+      "definitions": {
+        "type: bug": "Default for bug-template reports: errors, crashes, wrong behavior, docs mistakes or missing docs reported as bugs, stdlib/dependency deprecation warnings hitting pip (e.g. utcnow, pkg_resources). Not when the reporter says it's not really a bug (enhancement).",
+        "type: feature request": "Feature-template issues: new options, capabilities, behavior changes, better handling of server errors, docs/behavior clarification proposals. Not for proposals to deprecate/remove pip options (deprecation) or drop Python versions (maintenance).",
+        "type: support": "Failure caused by the user's own environment rather than pip: no internet/offline installs, config file permissions, stale config options, CI runner images, git line-ending settings, cache questions, Python-version-pinned deps. Bug template does not prevent this.",
+        "type: maintenance": "Project upkeep: dropping support for an EOL Python version, CI, release tooling, development infrastructure. Not for user-facing features.",
+        "type: docs": "Very rare; documentation issues are normally labeled by template (bug or feature request). Only for maintainer-filed pure docs tasks with no template.",
+        "type: enhancement": "Bug-template reports that are really improvement requests: replace an internal error with a meaningful message, warn about silently ignored input, make order-dependent extras behave consistently, or reporter says 'not strictly a bug'. Replaces 'type: bug'.",
+        "type: deprecation": "Proposals to deprecate/remove pip options or features, and breakages caused by pip's own deprecations/removals (e.g. legacy setup.py develop/editable removal). Not for third-party deprecation warnings (bug).",
+        "type: performance": "Resolver doing needless work (redundant backtracking/downloads, constraints not applied across extras). Plain slowness or CPU/uninstall overhead reported via bug template gets 'type: bug' instead.",
+        "C: error messages": "Content or rendering of pip's error messages: unhelpful 'Fatal internal error' that should be a clear message, rich formatting mangling text (e.g. extras brackets), machine-readable errors.",
+        "C: dependency resolution": "Resolver mishandling extras, constraints, or URL requirements (order dependence, crashes/AssertionError, constraint not applied). Not for generic conflict reports, endless backtracking complaints, pre-release selection, or resolver feature requests.",
+        "C: network connectivity": "Connection errors/aborts, SSL/TLS settings, proxies, HTTP status errors (e.g. 5xx not surfaced) when talking to indexes. Add alongside support/bug/feature request.",
+        "project: vendored dependency": "Root cause lies in a vendored library (distlib script launchers, requests, urllib3, packaging, etc.) or fix requires upgrading/patching it, e.g. console_scripts exe argument handling."
+      }
+    },
+    {
+      "at_issue": 640,
+      "event": "rejected",
+      "holdout_f1_current": 0.7564,
+      "holdout_f1_candidate": 0.6974,
+      "instructions": "This is a new issue in pypa/pip. Maintainers label sparingly, mostly by template: bug-template issues get 'type: bug' (even if phrased as a request); feature-template issues get 'type: feature request'. Exceptions: user-environment confusion gets 'type: support'; governance/policy/release work gets 'type: maintenance'. Usually exactly one 'type:' label. Add 'C:'/'project:' labels only when that area is unmistakably the core subject; mentioning requirements, warnings or slowness is not enough. When in doubt, omit extra labels.",
+      "definitions": {
+        "type: bug": "Default for bug-report-template issues: failures, crashes, wrong output, unwanted warnings, slowdowns, resolver failures, even feature-like asks filed via bug template. Not when the cause is clearly the user's environment/misunderstanding (support).",
+        "type: feature request": "Default for feature-template issues: new options, changed defaults, clearer messages, behavior changes. Not for project governance/policy (maintenance), pure speed improvements (performance), or user questions misfiled in the feature template (support).",
+        "type: support": "User problem with a known answer: shell quoting/redirect mistakes, outdated pip on new Python, DNS/proxy/firewall trouble, ResolutionTooDeep in huge envs, expected behavior misunderstood (e.g. needing setuptools offline). Not for local test-suite failures (bug).",
+        "type: maintenance": "Project administration: PyPI org/publishing, security policy, supported-versions policy, release process, CI and dev infrastructure. Apply even when filed with the feature template; may combine with docs.",
+        "type: docs": "Request primarily to add or fix documentation or written policy text. Not for behavior changes that would merely also need docs.",
+        "type: enhancement": "Rare. Small tweak to existing behavior, e.g. dropping a warning in a VCS workflow or preserving data (credentials) in freeze/direct_url output, often labeled [RFC]. Never alongside bug or feature request.",
+        "type: deprecation": "Maintainer tracking issues for deprecating/removing pip functionality (e.g. legacy .egg detection), usually no template. Not users reporting deprecation warnings about packages' non-standard versions/specifiers (those are bug).",
+        "type: performance": "Feature-template requests to make pip faster (caching, fewer network calls). Slowness reported via bug template, including slow resolution or extra index queries, gets 'type: bug' instead.",
+        "C: error messages": "Pip reports failures misleadingly or badly: raw tracebacks instead of pip's wrapped error, network errors shown as 'Could not find a version', requests to show what was searched/found. Not warnings or general hints.",
+        "C: dependency resolution": "Rare. Resolver algorithm internals are the subject: backjumping/backtracking bugs, resolver profiling of very long resolves, or reporting what candidates were considered. Not ordinary install conflicts, extras, direct-URL or platform marker failures.",
+        "C: network connectivity": "Network failures are the subject: read timeouts, getaddrinfo/DNS errors, connection retries, --retries behavior during downloads. Can be the only label when such an issue misuses the feature template.",
+        "project: vendored dependency": "Rare. Behavior leaking from vendored libraries into pip, e.g. their deprecation warnings shown to users needing suppression. Not CVEs in vendored urllib3, resolvelib backjumping bugs, or pkgutil/old-pip errors."
+      }
+    },
+    {
+      "at_issue": 800,
+      "event": "rejected",
+      "holdout_f1_current": 0.702,
+      "holdout_f1_candidate": 0.6543,
+      "instructions": "New issue in pypa/pip. Usually one 'type:' label. Bug template \u2192 'type: bug' if pip itself may be at fault; 'type: support' if it's clearly the user's environment, a third-party package, local network/SSL, or a how-to question, even via bug/feature template. Feature template \u2192 'type: feature request'. Bug-template reports that pip works but could be better \u2192 'type: enhancement'. Add 'C:'/'project:' only when that area is the core subject. When in doubt, omit extras.",
+      "definitions": {
+        "type: bug": "pip itself misbehaves: crashes, wrong results, parse errors, regressions, unexpected upgrades, broken config handling, missing promised artifacts. Not for user-environment problems (support) or 'works but could be faster/more informative' (enhancement).",
+        "type: feature request": "Genuine feature-template proposals: new options, behaviors, tooling, CI additions, vendored-library upgrades for new capabilities. Not for feature-template misuse that is really a usage question (support).",
+        "type: support": "User's own setup is the problem: can't install a third-party package, pip not found/not recognized, No module named pip, SSL certificate or connection errors, wrong Python, how-to questions, vague low-effort reports, or follow-ups asking how someone fixed something.",
+        "type: maintenance": "Work on pip's project infrastructure: CI, GitHub Actions, security scorecards, docs build tooling (Sphinx extensions), changelog/release process. Can co-occur with feature request, docs, or enhancement.",
+        "type: docs": "Proposals about pip's documentation site, its tooling, or changelog structure/format. Bug-template reports that docs are missing or wrong usually get 'type: bug' instead.",
+        "type: enhancement": "Bug-template or RFC issues where pip works but behavior could be improved: avoid redundant downloads/builds, show more detailed errors, restructure changelog. Not for feature-template requests (feature request) or actual failures (bug).",
+        "type: deprecation": "About pip's own deprecation notices or removals shown to users. Not for suggestions that pip stop using deprecated Python modules.",
+        "type: performance": "Speed is the main subject of an improvement request (unnecessary downloads, slow install step), usually with enhancement or feature request. Not for one-off slow-install bug reports in specific environments.",
+        "C: error messages": "Error text is misleading or confusing to users, e.g. proxy-malformed error with no proxy set, confusing transient hash-mismatch errors. Not for requests to show more detail (enhancement) or wrong remedy text in code.",
+        "C: dependency resolution": "Questions about the resolver's backtracking strategy or version choice algorithm. Not for unexpected upgrades, conflict-reporting output, or install failures that merely mention dependencies.",
+        "C: network connectivity": "Downloads, HTTPS/SSL certificate errors, HTTPSConnectionPool/retry failures, truststore/certifi, resuming interrupted downloads, flaky network-caused failures. Often paired with support or feature request.",
+        "project: vendored dependency": "The defect lies in a vendored library's own code (e.g. vendored rich importing something unexpectedly). Not for requests to bump/patch a vendored library for CVEs or new features, nor packaging-version parse regressions."
+      }
+    },
+    {
+      "at_issue": 960,
+      "event": "rejected",
+      "holdout_f1_current": 0.6154,
+      "holdout_f1_candidate": 0.5769,
+      "instructions": "New pypa/pip issue. Pick the type by subject, not template. Feature-template issues about CI/release testing \u2192 maintenance; about speed \u2192 performance; docs-asking \u2192 docs; removing/deprecating behavior \u2192 deprecation; how-to/config questions \u2192 support. Use 'type: feature request' only when no more specific type fits. Bug-template reports get 'type: bug' unless clearly user setup/usage/third-party (support) or slowness/size (performance). Add C:/project: labels per definitions; usually skip 'C: dependency resolution'.",
+      "definitions": {
+        "type: bug": "pip misbehaves: errors, crashes, wrong behavior, missing release artifacts/tags, vague slowness after upgrade. Includes resolver bugs and network/SSL failures. Not for configuration questions, third-party/env problems (support), or feature-template proposals.",
+        "type: feature request": "Feature-template request for new pip functionality/options that is not primarily about CI (maintenance), speed (performance), docs, deprecation, or a usage question (support). Don't add alongside those types.",
+        "type: support": "User's local setup, third-party tool/environment, or 'how do I / is this intended' question, even if filed as bug or feature: custom-built packages, conda envs, pipx PATH, index-url overriding, requires-python enforcement asks, running tests locally.",
+        "type: maintenance": "pip's own CI, test matrix, release process, packaging of pip's wheels (e.g. license files), or development/test-suite setup, even when filed via feature template or by users. Can co-occur with support for local test failures.",
+        "type: docs": "Issue mainly asks for better/clearer documentation of existing behavior, options, or env vars, even if filed via feature template or framed as a problem.",
+        "type: enhancement": "Rarely used: small improvements to existing behavior, such as UX hints in messages or speeding up an existing path (e.g. shallow git clone). May pair with performance or C: error messages.",
+        "type: deprecation": "Proposals to deprecate, warn about, or remove support for some behavior/input (non-standard filenames, hashes in constraints), or about pip's deprecation notices. Use instead of feature request.",
+        "type: performance": "Main concern is speed or resource use (time, download size, compile time, resolver backtracking depth), including feature proposals to make pip faster. Not vague 'slow after upgrade' reports lacking detail (bug).",
+        "C: error messages": "Issue centers on wording/helpfulness of pip's error or warning output: unhelpful/misleading errors, confusing warnings, lost version listings in errors, proposals for new hints or warnings.",
+        "C: dependency resolution": "Very rare: only for broad resolver design/architecture workstreams. Individual resolver bugs, wrong version picks, preference logic, or ResolutionImpossible reports get just 'type: bug'.",
+        "C: network connectivity": "SSL/TLS certificate errors, HTTPS connection failures, private index connection errors, cert options ignored, hostname verification issues.",
+        "project: vendored dependency": "Root cause is a vendored library's behavior (truststore, resolvelib, requests, urllib3), e.g. truststore failing on an interpreter or resolvelib ResolutionTooDeep. Not for pip's vendoring policy issues or packaging-limitations pip should handle."
+      }
+    },
+    {
+      "at_issue": 1120,
+      "event": "accepted",
+      "holdout_f1_current": 0.6522,
+      "holdout_f1_candidate": 0.7125,
+      "instructions": "New pypa/pip issue. Use few labels: usually one 'type:' label. Bug-template reports are NOT automatically 'type: bug': most user failures (broken environment, install errors, permissions, odd platforms, vague 'pip doesn't work') get 'type: support'. Use 'type: bug' only for clear, reproducible pip logic defects. Feature-template issues get 'type: feature request' unless they propose deprecation/removal or project policy. Add 'C:'/'project:' labels only when clearly the core subject. When in doubt, omit.",
+      "definitions": {
+        "type: bug": "Clear, reproducible defect in pip's own logic or code, including inaccurate code comments and invalid input accepted silently. Not for user environment/install failures, tracebacks from broken setups, or Windows Store/permission quirks (those are support).",
+        "type: feature request": "Feature-template requests: new options, changed defaults, CI test additions, metadata/platform support, more context in errors. Not for proposals to deprecate/remove pip functionality (deprecation) or project policy/repo admin (maintenance).",
+        "type: support": "Common. Bug-template reports where the user's environment, installation, Python distribution (MS Store, conda, embedded), shadowed modules, permissions, corrupt downloads, or misunderstanding is likely the cause, or the report is vague/unreproducible.",
+        "type: maintenance": "Project administration: GitHub issue templates/repo settings, contributor policies (e.g. AI-generated PRs), release tooling. Not for feature-template proposals to add CI tests (feature request).",
+        "type: docs": "Request to add or fix pip's published documentation. Not for typos in source code comments (bug) or behavior changes that also need docs.",
+        "type: enhancement": "Small polish of existing pip output reported via bug template, e.g. ordering of versions in messages or outdated command suggestions in notices. Not real defects; don't combine with bug or feature request.",
+        "type: deprecation": "Proposals or tracking to deprecate and remove pip functionality or code paths (legacy setup.py builds, pkg_resources backend), or pip's deprecation notices. Use instead of feature request for such proposals.",
+        "type: performance": "pip commands themselves are slow in normal use and the issue is about speed. Not for slow test suites.",
+        "C: error messages": "Issue centers on what pip reports on failure: unhandled exceptions needing a clear message, misleading/wrong error text, resolver failure messages (ResolutionTooDeep, conflicts), requests for more error context. Not for message ordering polish (enhancement).",
+        "C: dependency resolution": "Rare. Resolver conflict/backtracking reports or collections (ResolutionTooDeep, dependency conflicts), usually alongside C: error messages. Not for specific bugs with --python-version, ResolutionImpossible bugs, metadata sourcing, or error-context feature requests.",
+        "C: network connectivity": "Proxy, SSL context/truststore, and download retry/resume behavior. Not for HTTP caching bugs.",
+        "project: vendored dependency": "Requests to upgrade/patch a vendored library, or bugs rooted in vendored/build-isolation import behavior. Not for proxy/SSL issues, HTTP caching, platform support, or removing pip features."
+      }
+    }
+  ]
+}

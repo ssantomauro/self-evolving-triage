@@ -1,0 +1,20 @@
+{
+  "bot": "C. Sage (fixed)",
+  "repo": "pandas-dev/pandas",
+  "seconds": 0.1,
+  "instructions": "This is a new GitHub issue filed in the pandas-dev/pandas repository. Decide which labels the maintainers would apply to it. A label applies only when the issue is clearly about that topic.",
+  "definitions": {
+    "Bug": "",
+    "Enhancement": "",
+    "Docs": "",
+    "Regression": "Functionality that used to work in a prior pandas version",
+    "Performance": "Memory or execution speed performance",
+    "Arrow": "pyarrow functionality",
+    "Strings": "String extension data type and string data",
+    "Missing-data": "np.nan, pd.NaT, pd.NA, dropna, isnull, interpolate",
+    "Indexing": "Related to indexing on series/frames, not to indexes themselves",
+    "Datetime": "Datetime data dtype",
+    "IO CSV": "read_csv, to_csv",
+    "Groupby": ""
+  }
+}

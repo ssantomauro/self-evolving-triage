@@ -1,0 +1,82 @@
+{
+  "bot": "A. Rules",
+  "repo": "psf/black",
+  "seconds": 0.5,
+  "T: bug": [
+    "\\bbug\\b",
+    "\\berror\\b",
+    "exception",
+    "traceback",
+    "\\bcrash",
+    "doesn'?t work",
+    "\\bbroken\\b",
+    "\\bfails?\\b",
+    "unexpected",
+    "incorrect",
+    "wrong"
+  ],
+  "T: style": [
+    "\\bformat(ting|ted|s)?\\b",
+    "\\bstyle\\b"
+  ],
+  "T: enhancement": [
+    "feature request",
+    "\\bfeature\\b",
+    "would be nice",
+    "\\bsupport for\\b",
+    "\\badd (a|an|support)\\b",
+    "\\ballow\\b",
+    "\\bproposal\\b",
+    "\\benhancement\\b"
+  ],
+  "T: documentation": [
+    "\\bdocs?\\b",
+    "documentation",
+    "readme",
+    "\\btypo\\b",
+    "docstring example"
+  ],
+  "F: strings": [
+    "\\bstring"
+  ],
+  "F: linebreak": [
+    "\\blinebreak"
+  ],
+  "F: docstrings": [
+    "\\bdocs?\\b",
+    "documentation",
+    "readme",
+    "\\btypo\\b",
+    "docstring example"
+  ],
+  "C: preview style": [
+    "\\bformat(ting|ted|s)?\\b",
+    "\\bstyle\\b"
+  ],
+  "C: configuration": [
+    "pyproject",
+    "\\bconfig",
+    "\\boption\\b",
+    "\\bflag\\b"
+  ],
+  "C: crash": [
+    "\\bcrash",
+    "segfault",
+    "internal error",
+    "cannot parse",
+    "failed to parse"
+  ],
+  "C: packaging": [
+    "\\bwheel\\b",
+    "\\bpackag",
+    "\\binstall(ation)?\\b",
+    "\\bpypi\\b"
+  ],
+  "C: maintenance": [
+    "\\bci\\b",
+    "github actions",
+    "\\btests?\\b",
+    "\\bbump\\b",
+    "\\brefactor"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "bot": "B. Classic ML",
+  "repo": "pandas-dev/pandas",
+  "seconds": 14.7,
+  "trained_labels": [
+    "Arrow",
+    "Bug",
+    "Datetime",
+    "Docs",
+    "Enhancement",
+    "Groupby",
+    "IO CSV",
+    "Indexing",
+    "Missing-data",
+    "Performance",
+    "Regression",
+    "Strings"
+  ],
+  "examples": 1283
+}

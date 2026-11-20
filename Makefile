@@ -20,7 +20,7 @@ estimate:         ## Sage token/cost estimate for C and D, no calls
 pilot:            ## small paid run: first 200 issues per repo, versions C and D (~$1; D needs Anthropic credentials)
 	$(PY) -m triage.replay --bots C,D --limit 200
 
-sage:             ## versions C and D on everything (needs SAGE_API_KEY and Anthropic credentials, ~$10)
+sage:             ## versions C and D on everything (needs SAGE_API_KEY and Anthropic credentials, ~$6 of Sage)
 	$(PY) -m triage.replay --bots C,D
 
 report:           ## scores + charts from recorded runs, no API calls
