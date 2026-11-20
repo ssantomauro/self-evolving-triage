@@ -10,6 +10,14 @@ This repo is an experiment that builds that loop and lets it run on real data: a
 new GitHub issues, replayed over the history of five public repositories. It's a showcase of the mechanism, not
 a benchmark. The write-up with diagrams and every rewrite proposal is in [`docs/index.html`](docs/index.html).
 
+## Out of scope
+
+Building the best issue labeller is not a goal. None of the four versions is tuned to win: the rules are a
+typical keyword table, the ML model is a standard TF-IDF + logistic regression baseline with default-ish
+settings, and the Sage versions use short, generic instructions. Each could be made more accurate with more
+work, and a well-tuned ML model may well beat every version here. That's fine. The experiment exists to show how
+a decision model and an LLM can work together so software improves itself from data, not to compare accuracy.
+
 ## Four ways to build the same feature
 
 | Version | How it decides | What changes over time |
