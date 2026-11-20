@@ -6,17 +6,23 @@ A decision model ([Levanto Sage 2](https://docs.levanto.ai)) makes every decisio
 reads the mistakes and proposes better rules in plain English. The software tests each proposal on its own
 recent history and keeps it only if it works.
 
-This repo is an experiment that builds that loop and lets it run on real data: an issue-triage bot that labels
-new GitHub issues, replayed over the history of five public repositories. It's a showcase of the mechanism, not
-a benchmark. The write-up with diagrams and every rewrite proposal is in [`docs/index.html`](docs/index.html).
+> **Goal: experiment with an approach, not build the best code.** This repo tests whether a decision model and
+> an LLM can work together so that software improves itself from how people use it. The code exists only to run
+> that experiment and make the result visible.
+
+The experiment builds that loop and lets it run on real data: an issue-triage bot that labels new GitHub issues,
+replayed over the history of five public repositories. The write-up with diagrams and every rewrite proposal is
+in [`docs/index.html`](docs/index.html).
 
 ## Out of scope
 
-Building the best issue labeller is not a goal. None of the four versions is tuned to win: the rules are a
-typical keyword table, the ML model is a standard TF-IDF + logistic regression baseline with default-ish
-settings, and the Sage versions use short, generic instructions. Each could be made more accurate with more
-work, and a well-tuned ML model may well beat every version here. That's fine. The experiment exists to show how
-a decision model and an LLM can work together so software improves itself from data, not to compare accuracy.
+- **The best issue labeller.** Issue labelling is just a convenient place to watch the loop work. None of the
+  four versions is tuned to win: the rules are a typical keyword table, the ML model is a standard TF-IDF +
+  logistic regression baseline, and the Sage versions use short, generic instructions. Each could be more
+  accurate with more work, and a well-tuned ML model may beat every version here. That's fine.
+- **The best code.** This is experiment code, not a product or a library. It isn't optimized, hardened or meant
+  for production, and the design choices favour being easy to read and reproduce over being complete.
+- **A benchmark.** The numbers show that the loop works. They aren't a ranking of decision models against ML.
 
 ## Four ways to build the same feature
 
