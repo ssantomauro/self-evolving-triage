@@ -83,6 +83,19 @@ out because they depend on what happens after an issue is opened. The label sets
 | `triage/sage.py` | Sage client with batching, retries and a response cache |
 | `triage/replay.py` | The harness: decide, then learn, issue by issue |
 
+## Using other models
+
+Sage 2 and Claude are the models this run happened to use, not requirements of the approach. The loop only
+needs a decision model that returns a probability per label and an LLM that can propose new instructions, so
+the code can be adjusted to use others:
+
+- **Another decision model:** write a client like `triage/sage.py` and adapt the request and response mapping
+  in `triage/bots/sage_static.py` (`group()` and `parse()`). The learner in `sage_learner.py` only works with
+  label probabilities, so it stays the same.
+- **Another LLM:** replace the API call in `triage/rewriter.py`. It takes the current rules and recent mistakes
+  and must return new instructions and label definitions. The prompt and the test that accepts or rejects them
+  don't depend on the provider.
+
 ## Run it
 
 ```bash

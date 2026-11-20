@@ -313,6 +313,7 @@ pre { background: var(--soft); border-radius: 8px; padding: 14px 16px; overflow-
 <section class="col">
   <h2>Run it yourself</h2>
   <p>Everything is in the <a href="https://github.com/ssantomauro/self-evolving-triage">repository</a>: the four versions, the replay harness and every decision each version made, including the full log of rewrite proposals. Each version is a short file in <code>triage/bots/</code>.</p>
+  <p>Sage 2 and Claude are the models this run used, not requirements of the approach. The loop needs a decision model that returns a probability per label and an LLM that can propose new instructions, so the code can be adjusted to use others: a new client and request mapping for the decision model, and a different API call in the rewrite step for the LLM. The learner and the test that accepts or rejects new rules stay the same.</p>
 <pre>make install &amp;&amp; make fetch      # download the issue histories
 make classic                    # versions A and B, free
 export SAGE_API_KEY=...         # plus ANTHROPIC_API_KEY for version D
