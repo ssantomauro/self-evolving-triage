@@ -11,8 +11,7 @@ recent history and keeps it only if it works.
 > that experiment and make the result visible.
 
 The experiment builds that loop and lets it run on real data: an issue-triage bot that labels new GitHub issues,
-replayed over the history of five public repositories. The write-up with diagrams and every rewrite proposal is
-in [`docs/index.html`](docs/index.html).
+replayed over the history of five public repositories.
 
 ## Out of scope
 
@@ -30,7 +29,7 @@ in [`docs/index.html`](docs/index.html).
 |---|---|---|
 | **A. Rules** | Keyword patterns, like a typical auto-labeler config | Nothing. A developer has to edit the patterns. |
 | **B. Classic ML** | TF-IDF + logistic regression per label | Weights, retrained every 50 issues on what maintainers did |
-| **C. Sage (fixed)** | One Sage 2 `tags` decision per issue, from label names and descriptions | Nothing. Shows what the decision model does alone. |
+| **C. Sage, fixed** | One Sage 2 `tags` decision per issue, from label names and descriptions | Nothing. Shows what the decision model does alone. |
 | **D. Sage + learner** | The same Sage decision as C | Its **rules**: memory of similar past issues, a cutoff per label, and instructions and label definitions rewritten by Claude from recent mistakes, kept only if they beat the current rules on the last 60 issues |
 
 In D the decision logic is **data** (instructions, label definitions, cutoffs), not code. The program never
@@ -42,17 +41,20 @@ changes; its behaviour does. Every proposal is logged with the scores that accep
 6,643 issues from pandas, black, pydantic, pip and poetry, decided in date order. Each version decides first
 and only then sees the maintainers' labels.
 
+Scores are **label F1**, from 0 to 1: how often the suggested labels match the maintainers' labels. Both wrong
+labels and missed labels lower it. It is a grade on past decisions, not the decision model's probability.
+
 | Version | Label F1 | First 50 issues | New labels | Who changes it |
 |---|---:|---:|---:|---|
 | A. Rules | 0.469 | 0.503 | 0.229 | a developer |
 | B. Classic ML | 0.760 | 0.552 | 0.068 | retraining |
-| C. Sage (fixed) | 0.661 | 0.650 | 0.383 | nobody |
+| C. Sage, fixed | 0.661 | 0.650 | 0.383 | nobody |
 | D. Sage + learner | 0.778 | 0.663 | 0.619 | itself |
 
 - C and D use the same model and start from the same instructions. C stays flat around 0.65; D climbs to about
   0.80 once its rules start rewriting themselves.
-- Claude proposed 40 rewrites. 12 went live and 28 were rejected by the test on recent issues, some of which
-  would have cut the score by a third.
+- Claude proposed 40 rewrites. 12 went live and 28 were rejected by the test on recent issues. Seven of the
+  rejected ones would have cut the score by more than 0.1.
 - Classic ML does well here too: issue labelling has plenty of examples and fixed categories. D's edge is that it
   works from the first issue, handles labels it has never seen, and every change it makes to itself is readable.
 - Cost: about $5.50 of Sage for ~16,900 decisions, plus 40 Claude calls.
